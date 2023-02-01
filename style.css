@@ -22,6 +22,21 @@
     background-color: red;
 }
 
+.start{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    background-color: rgba(61, 101, 233, 0.8);
+}
+.start-text{
+    font-size: 48px;
+    color: white;
+    margin-top: 60%;
+    font-weight: bold;
+}
+
+
 .ball {
     position: absolute;
     width: 25px;
@@ -39,4 +54,31 @@
     left: 60px;
     width: 480px;
     height: 240px;
+    display: grid;
+    /*grid-auto-rows: 10px 1fr 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 'row row row row row row';*/
+}
+
+
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    margin: 3px;
+    box-sizing: border-box;
+}
+
+.col{
+    height: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.emphasize-text {
+    color: red;
 }
