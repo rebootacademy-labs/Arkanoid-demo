@@ -34,6 +34,7 @@ function startGame(){
 
 function gameEngine () {
     platform.move()
+    ball.move()
 }
 
 function Platform (){
@@ -43,6 +44,7 @@ function Platform (){
     this.left = 250
     this.width = 100
     this.speed = 24
+    this.top = 770
     
     this.move = function () {
        
@@ -60,4 +62,36 @@ function Platform (){
 
 const platform = new Platform()
 
-funtion Ball ()
+function Ball () {
+    
+    this.speedX = 0 
+    this.speedY = 10;
+    this.top = 600
+    this.height = 25
+    this.width = 25
+    this.left = 288
+    this.sprite = document.querySelector('.ball')
+    this.collision
+    this.collidesWithSomething = function (){
+        return this.collidesWithPlatform || this.collidesWithWalls ||
+        this.collidesWithBlocks || this.collidesWithBottom
+    }
+    this.collidesWithPlatform = function () { // el top ball + hight ball != top de platform*/
+        if (this.top + this.height >= platform.top 
+            && this.left >= platform.left 
+            && this.left + this.width <= platform.left + platform.width){
+                
+                return true
+            }return false
+
+    }
+    this.move = function (){
+        if(!this.collidesWithPlatform()){ 
+        
+            this.top += this.speedY;
+            this.sprite.style.top = this.top + "px";
+        }
+    }
+}
+
+const ball = new Ball();
