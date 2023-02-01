@@ -1,0 +1,42 @@
+.container {
+    height:800px;
+    width: 600px;
+    background-color: yellow;
+    position: relative;
+}
+
+.canvas {
+    position: absolute;
+    background-color: hsl(207, 25%, 60%);
+    width: 100%;
+    height: 100%;
+}
+
+
+.plataform {
+    position: absolute;
+    top: 770px;
+    left: 235px;
+    width: 130px;
+    height: 20px;
+    background-color: red;
+}
+
+.ball {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius:50% ;
+    background-color: hsl(120, 84%, 30%);
+    top: 600px;
+    left: 288px;
+}
+
+.blocks {
+    position: absolute;
+    background-color: black;
+    top: 60px;
+    left: 60px;
+    width: 480px;
+    height: 240px;
+}
