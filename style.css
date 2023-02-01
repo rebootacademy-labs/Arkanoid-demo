@@ -13,7 +13,7 @@
 }
 
 
-.plataform {
+.platform {
     position: absolute;
     top: 770px;
     left: 235px;
@@ -55,9 +55,6 @@
     width: 480px;
     height: 240px;
     display: grid;
-    /*grid-auto-rows: 10px 1fr 10px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-areas: 'row row row row row row';*/
 }
 
 
