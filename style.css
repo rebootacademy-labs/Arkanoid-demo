@@ -16,8 +16,8 @@
 .platform {
     position: absolute;
     top: 770px;
-    left: 235px;
-    width: 130px;
+    left: 250px;
+    width: 100px;
     height: 20px;
     background-color: red;
 }
