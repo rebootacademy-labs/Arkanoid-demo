@@ -64,7 +64,7 @@ const platform = new Platform()
 
 function Ball() {
 
-  this.speedX = 10;
+  this.speedX = -10;
   this.speedY = -15;
   this.top = 600
   this.height = 25
@@ -98,11 +98,31 @@ function Ball() {
       this.speedY *= (-1);
     }
   }
-
+  this.collidesWithBlocks = function () {
+    if (this.top <= blockCollectionInstance.top + blockCollectionInstance.height // abajo
+      && this.left + this.width >= blockCollectionInstance.left // izquierda
+      && this.left <= blockCollectionInstance.left + blockCollectionInstance.width // derecha
+      && this.top + this.height >= blockCollectionInstance.top) // arriba 
+    {
+      this.speedX *= (-1)
+      this.speedY *= (-1)
+      document.querySelector('.row0').parentNode.removeChild(document.querySelector('.row0'))
+      blockCollectionInstance.pop();
+      
+    }
+  }
+  /*this.collidesWithTopOrBotBlock = function (){
+    if ((this.top <= blockCollectionInstance.top + blockCollectionInstance.height 
+      || this.top + this.height <= blockCollectionInstance.top)
+    &&  (this.left + this.width >= blockCollectionInstance.left
+    &&  this.left <= blockCollectionInstance.left + blockCollectionInstance.width))
+      this.speedX *= (-1)
+      this.speedY *= (-1)
+  }*/
 
 
   this.move = function () {
-    if (!this.collidesWithPlatform() && !this.collidesWithLateralWalls() && !this.collidesWithTopWall()) {
+    if (!this.collidesWithPlatform() && !this.collidesWithLateralWalls() && !this.collidesWithTopWall() && !this.collidesWithBlocks()) {
       this.left += this.speedX;
       this.sprite.style.left = this.left + "px";
       this.top += this.speedY;
@@ -119,8 +139,6 @@ function Block(width, height, top, left, i, j) {
   let self = this
   this.width = width
   this.height = height
-  //this.sprite.style.width = this.width + 'px'
-  //this.sprite.style.height = this.height + 'px'
   this.top = top
   this.left = left
   this.draw = function (){
@@ -130,12 +148,12 @@ function Block(width, height, top, left, i, j) {
     self.sprite.style.top    = self.top + 'px'
     self.sprite.style.left   = self.left + 'px'
   }
- 
-  //self.sprite.style.width = "300px"
-  //self.sprite.style.height = "300px"
+  this.delete = function () {
+
+  }
 }
 
-function BlockColletion(width, height, rows, columns, left, top) {
+function BlockCollection(width, height, rows, columns, left, top) {
 
   this.blocks    = []
   this.width     = width
@@ -148,7 +166,7 @@ function BlockColletion(width, height, rows, columns, left, top) {
   this.rows      = rows
   this.columns   = columns
 
-  this.generateBlockColletion = function () {
+  this.generateBlockCollection = function () {
 
     let stringResult = '';
 
@@ -175,8 +193,9 @@ function BlockColletion(width, height, rows, columns, left, top) {
   }
 }
 
-const blockCollectionInstance = new BlockColletion(480, 240, 6, 3, 60, 60);
+const blockCollectionInstance = new BlockCollection(480, 240, 1, 1, 60, 60);
+//const blockCollectionInstance = new BlockCollection(120, 120, 1, 1, 200, 120);
 const blockHTML = document.querySelector('.blocks');
-console.log(blockCollectionInstance.generateBlockColletion())
-blockHTML.innerHTML = blockCollectionInstance.generateBlockColletion();
+console.log(blockCollectionInstance.generateBlockCollection())
+blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
 blockCollectionInstance.drawAllBlocks()
