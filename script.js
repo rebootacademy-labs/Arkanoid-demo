@@ -115,12 +115,22 @@ const ball = new Ball();
 
 
 function Block(width, height, top, left, i, j) {
+  
   let self = this
   this.width = width
   this.height = height
+  //this.sprite.style.width = this.width + 'px'
+  //this.sprite.style.height = this.height + 'px'
   this.top = top
   this.left = left
-  this.sprite = document.querySelector(`.column${i}${j}`)
+  this.draw = function (){
+    this.sprite = document.querySelector(`.column${i}${j}`)
+    self.sprite.style.width  = self.width + 'px'
+    self.sprite.style.height = self.height + 'px'
+    self.sprite.style.top    = self.top + 'px'
+    self.sprite.style.left   = self.left + 'px'
+  }
+ 
   //self.sprite.style.width = "300px"
   //self.sprite.style.height = "300px"
 }
@@ -160,8 +170,13 @@ function BlockColletion(width, height, rows, columns, left, top) {
     }
     return stringResult;
   }
+  this.drawAllBlocks = function () {
+    this.blocks.forEach (function (block) {block.draw()})
+  }
 }
 
-const blockCollectionInstance = new BlockColletion(480, 240, 2, 2, 60, 60);
+const blockCollectionInstance = new BlockColletion(480, 240, 6, 3, 60, 60);
 const blockHTML = document.querySelector('.blocks');
+console.log(blockCollectionInstance.generateBlockColletion())
 blockHTML.innerHTML = blockCollectionInstance.generateBlockColletion();
+blockCollectionInstance.drawAllBlocks()
