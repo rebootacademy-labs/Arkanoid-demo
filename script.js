@@ -64,8 +64,8 @@ const platform = new Platform()
 
 function Ball() {
 
-  this.speedX = -10;
-  this.speedY = -15;
+  this.speedX = -45;
+  this.speedY = -30;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -106,11 +106,12 @@ function Ball() {
     {
       this.speedX *= (-1)
       this.speedY *= (-1)
-      document.querySelector('.row0').parentNode.removeChild(document.querySelector('.row0'))
-      blockCollectionInstance.pop();
+      //document.querySelector('.row0').parentNode.removeChild(document.querySelector('.row0'))
+      blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
       
     }
   }
+
   /*this.collidesWithTopOrBotBlock = function (){
     if ((this.top <= blockCollectionInstance.top + blockCollectionInstance.height 
       || this.top + this.height <= blockCollectionInstance.top)
@@ -141,6 +142,8 @@ function Block(width, height, top, left, i, j) {
   this.height = height
   this.top = top
   this.left = left
+  this.i = i;
+  this.j = j;
   this.draw = function (){
     this.sprite = document.querySelector(`.column${i}${j}`)
     self.sprite.style.width  = self.width + 'px'
@@ -148,8 +151,9 @@ function Block(width, height, top, left, i, j) {
     self.sprite.style.top    = self.top + 'px'
     self.sprite.style.left   = self.left + 'px'
   }
-  this.delete = function () {
-
+  this.delete = function (i, j) {
+    const blockToRemove = document.querySelector(`.column${i}${j}`);
+    blockToRemove.parentNode.removeChild(blockToRemove);
   }
 }
 
@@ -191,11 +195,25 @@ function BlockCollection(width, height, rows, columns, left, top) {
   this.drawAllBlocks = function () {
     this.blocks.forEach (function (block) {block.draw()})
   }
+  this.removeBlock = function (ballTop, ballLeft, ballWidth, ballHeight) {
+    let ballToRemove;
+    this.blocks.forEach((block) => {
+      console.log(block)
+      if(ballTop <= block.top + block.height // abajo
+        && ballLeft + ballWidth >= block.left // izquierda
+        && ballLeft <= block.left + block.width // derecha
+        && ballTop + ballHeight >= block.top) // arriba
+      {
+        console.log(block.i, block.j)
+      block.delete(block.i, block.j);}
+    })
+  }
 }
 
-const blockCollectionInstance = new BlockCollection(480, 240, 1, 1, 60, 60);
+const blockCollectionInstance = new BlockCollection(240, 240, 3, 3, 250, 60);
 //const blockCollectionInstance = new BlockCollection(120, 120, 1, 1, 200, 120);
 const blockHTML = document.querySelector('.blocks');
 console.log(blockCollectionInstance.generateBlockCollection())
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
 blockCollectionInstance.drawAllBlocks()
+console.log(blockCollectionInstance.blocks);
