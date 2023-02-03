@@ -1,22 +1,39 @@
+
+var timerId
 const initialText = document.querySelector('.start');
 let pos = 235
-var gameStarted = false
+var gameStarted = -1
 document.addEventListener('keyup', function (event) {
-  if (event.key === "g") initialText.parentNode.removeChild(initialText);
-  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+  initialText.style.display = "none"
+  if (gameStarted === -1) {
+    startGame();
+    gameStarted = 1
+  }
+  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' && gameStarted === 1) {
     platform.direction = null
   }
-  if (!gameStarted) {
-    startGame();
-    gameStarted = true
+  if (gameStarted === 0) {
+    this.location.reload();
   }
-
-
 })
 
+function gameOver() {
+  clearInterval(timerId);
+  initialText.style.display = 'block'
+  var finalText = document.querySelectorAll(".invisible-text");
+  finalText.forEach(e => e.style.display = 'inline')
+  gameStarted = 0;
+}
+
+function victory() {
+  clearInterval(timerId)
+  document.querySelector('.victory').style.display = 'block'
+  var finalText = document.querySelectorAll(".victory .invisible-text");
+  finalText.forEach(e => e.style.display = 'inline')
+  gameStarted = 0;
+}
+
 function startGame() {
-
-
   document.addEventListener('keydown', function (event) {
 
     if (event.key === 'ArrowRight') {
@@ -28,7 +45,7 @@ function startGame() {
     }
   })
 
-  const timerId = setInterval(gameEngine, 10)
+  timerId = setInterval(gameEngine, 10)
 
 }
 
@@ -47,16 +64,12 @@ function Platform() {
   this.top = 780
 
   this.move = function () {
-
     if (this.direction === -1 && this.left <= this.speed
       || this.direction ===
       1 && this.left >= 600 - this.width - this.speed)
       this.direction = 0;
-
     this.left += this.direction * this.speed
     this.sprite.style.left = this.left + 'px'
-
-
   }
 }
 
@@ -99,31 +112,19 @@ function Ball() {
     }
   }
   this.collidesWithBlocks = function () {
-    if (this.top <= blockCollectionInstance.top + blockCollectionInstance.height // abajo
+    if (this.top <= blockCollectionInstance.top + (blockCollectionInstance.top / blockCollectionInstance.rows) + blockCollectionInstance.height // abajo
       && this.left + this.width >= blockCollectionInstance.left // izquierda
       && this.left <= blockCollectionInstance.left + blockCollectionInstance.width // derecha
       && this.top + this.height >= blockCollectionInstance.top) // arriba 
     {
-      //this.speedX *= (-1)
-      //this.speedY *= (-1)
-      //document.querySelector('.row0').parentNode.removeChild(document.querySelector('.row0'))
       blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
-      
     }
   }
   this.collidesWithBottom = function () {
-    if(this.top + this.height > 800) this.speedY *= -1
+    if (this.top + this.height > 800) {
+      gameOver()
+    }
   }
-
-  /*this.collidesWithTopOrBotBlock = function (){
-    if ((this.top <= blockCollectionInstance.top + blockCollectionInstance.height 
-      || this.top + this.height <= blockCollectionInstance.top)
-    &&  (this.left + this.width >= blockCollectionInstance.left
-    &&  this.left <= blockCollectionInstance.left + blockCollectionInstance.width))
-      this.speedX *= (-1)
-      this.speedY *= (-1)
-  }*/
-
 
   this.move = function () {
     if (!this.collidesWithPlatform() && !this.collidesWithLateralWalls() && !this.collidesWithTopWall() && !this.collidesWithBlocks() && !this.collidesWithBottom()) {
@@ -139,7 +140,7 @@ const ball = new Ball();
 
 
 function Block(width, height, top, left, i, j) {
-  
+
   let self = this
   this.width = width
   this.height = height
@@ -147,31 +148,31 @@ function Block(width, height, top, left, i, j) {
   this.left = left
   this.i = i;
   this.j = j;
-  this.draw = function (){
+  this.draw = function () {
     this.sprite = document.querySelector(`.column${i}${j}`)
-    self.sprite.style.width  = self.width + 'px'
+    self.sprite.style.width = self.width + 'px'
     self.sprite.style.height = self.height + 'px'
-    self.sprite.style.top    = self.top + 'px'
-    self.sprite.style.left   = self.left + 'px'
+    self.sprite.style.top = self.top + 'px'
+    self.sprite.style.left = self.left + 'px'
   }
   this.delete = function (i, j) {
     const blockToRemove = document.querySelector(`.column${i}${j}`);
-    if (blockToRemove !== null){
+    if (blockToRemove !== null) {
       blockToRemove.parentNode.removeChild(blockToRemove);
-    } 
+    }
   }
 }
 
 function BlockCollection(width, height, rows, columns, left, top) {
 
-  this.blocks    = []
-  this.width     = width
-  this.height    = height
-  this.top       = 0
-  this.left      = 0
-  this.rows      = rows
-  this.columns   = columns
-  this.draw      = function () {
+  this.blocks = []
+  this.width = width
+  this.height = height
+  this.top = top
+  this.left = left
+  this.rows = rows
+  this.columns = columns
+  this.draw = function () {
     this.sprite = document.querySelector(".blocks")
     this.sprite.style.top = this.top + "px";
     this.sprite.style.left = this.left + "px";
@@ -184,55 +185,48 @@ function BlockCollection(width, height, rows, columns, left, top) {
     let stringResult = '';
 
     for (var i = 0; i < this.rows; i++) {
-     // stringResult += `<div class="row${i}">`;
       for (var j = 0; j < this.columns; j++) {
         stringResult += `<div class="col column${i}${j}"></div>`;
-        let blockToInsert = 
-          new Block(this.width / this.columns, 
-          this.height / this.rows, 
-          (this.height / this.rows)*i,
-          (this.width / this.columns)*j,
-          i,
-          j
-        )
+        let blockToInsert =
+          new Block(this.width / this.columns,
+            this.height / this.rows,
+            (this.height / this.rows) * i,
+            (this.width / this.columns) * j,
+            i,
+            j
+          )
         this.blocks.push(blockToInsert)
       }
-      //stringResult += '</div>' 
     }
     return stringResult;
   }
   this.drawAllBlocks = function () {
-    this.blocks.forEach (function (block) {block.draw()})
+    this.blocks.forEach(function (block) { block.draw() })
   }
   this.removeBlock = function (ballTop, ballLeft, ballWidth, ballHeight) {
 
-    for ( let i=0; i<this.blocks.length; i++){
+    for (let i = 0; i < this.blocks.length; i++) {
 
-      if (ballTop <= this.blocks[i].top + this.blocks[i].height // abajo
-        && ballLeft + ballWidth >= this.blocks[i].left // izquierda
-        && ballLeft <= this.blocks[i].left + this.blocks[i].width // derecha
-        && ballTop + ballHeight >= this.blocks[i].top) // arriba
-      { 
-        console.log(this.blocks[i])
-        this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j); 
-        this.blocks.splice(i,1)
-        ball.speedX *= -1
-        ball.speedY *= -1
-        console.log(this.blocks)
+      if (ballTop <= this.blocks[i].top + this.blocks[i].height + this.top // abajo
+        && ballLeft + ballWidth >= this.blocks[i].left + this.left // izquierda
+        && ballLeft <= this.blocks[i].left + this.blocks[i].width + this.left // derecha
+        && ballTop + ballHeight >= this.blocks[i].top + this.top) // arriba
+      {
+        this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j);
+        this.blocks.splice(i, 1)
+        if (this.blocks.length === 0) victory();
+        ball.speedX *= -1.03
+        ball.speedY *= -1.03
         break
-      } else{
-        console.log("no he eliminado nada")
       }
     }
-      
-    }
   }
+}
 
 
-const blockCollectionInstance = new BlockCollection(480, 240, 3, 3, 60, 60);
+const blockCollectionInstance = new BlockCollection(480, 240, 2, 2, 60, 60);
 
-//const blockCollectionInstance = new BlockCollection(120, 120, 1, 1, 200, 120);
 const blockHTML = document.querySelector('.blocks');
+blockCollectionInstance.draw();
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
 blockCollectionInstance.drawAllBlocks()
-console.log(blockCollectionInstance.blocks);
