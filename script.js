@@ -21,11 +21,11 @@ document.addEventListener('keyup', function (event) {
 
 function gameOver (){
 
-clearInterval(timerId);
-console.log("Se acabó ")
-initialText.style.display = 'block'
-var finalText = document.querySelector(".game-over-text");
-finalText.style.display = 'block'
+  clearInterval(timerId);
+  console.log("Se acabó ")
+  initialText.style.display = 'block'
+  var finalText = document.querySelector(".game-over-text");
+  finalText.style.display = 'block'
 }
 
 
@@ -114,7 +114,7 @@ function Ball() {
     }
   }
   this.collidesWithBlocks = function () {
-    if (this.top <= blockCollectionInstance.top + blockCollectionInstance.height // abajo
+    if (this.top <= blockCollectionInstance.top + (blockCollectionInstance.top/blockCollectionInstance.rows) + blockCollectionInstance.height // abajo
       && this.left + this.width >= blockCollectionInstance.left // izquierda
       && this.left <= blockCollectionInstance.left + blockCollectionInstance.width // derecha
       && this.top + this.height >= blockCollectionInstance.top) // arriba 
@@ -185,8 +185,8 @@ function BlockCollection(width, height, rows, columns, left, top) {
   this.blocks    = []
   this.width     = width
   this.height    = height
-  this.top       = 0
-  this.left      = 0
+  this.top       = top
+  this.left      = left
   this.rows      = rows
   this.columns   = columns
   this.draw      = function () {
@@ -226,10 +226,10 @@ function BlockCollection(width, height, rows, columns, left, top) {
 
     for ( let i=0; i<this.blocks.length; i++){
 
-      if (ballTop <= this.blocks[i].top + this.blocks[i].height // abajo
-        && ballLeft + ballWidth >= this.blocks[i].left // izquierda
-        && ballLeft <= this.blocks[i].left + this.blocks[i].width // derecha
-        && ballTop + ballHeight >= this.blocks[i].top) // arriba
+      if (ballTop <= this.blocks[i].top + this.blocks[i].height + this.top // abajo
+        && ballLeft + ballWidth >= this.blocks[i].left + this.left // izquierda
+        && ballLeft <= this.blocks[i].left + this.blocks[i].width + this.left // derecha
+        && ballTop + ballHeight >= this.blocks[i].top + this.top) // arriba
       { 
         console.log(this.blocks[i])
         this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j); 
@@ -247,10 +247,10 @@ function BlockCollection(width, height, rows, columns, left, top) {
   }
 
 
-const blockCollectionInstance = new BlockCollection(480, 240, 3, 3, 60, 60);
+const blockCollectionInstance = new BlockCollection(480, 240, 5, 5, 100, 100);
 
 //const blockCollectionInstance = new BlockCollection(120, 120, 1, 1, 200, 120);
 const blockHTML = document.querySelector('.blocks');
+blockCollectionInstance.draw();
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
 blockCollectionInstance.drawAllBlocks()
-console.log(blockCollectionInstance.blocks);

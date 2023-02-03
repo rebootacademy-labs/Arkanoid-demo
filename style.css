@@ -50,10 +50,8 @@
 }
 
 .blocks {
-    position: relative;
+    position: absolute;
     background-color: rgba(0,0,0, 0);
-    padding: 120px 0 0 60px;
-    margin: auto;
     
 }
 
