@@ -28,7 +28,7 @@ function startGame() {
     }
   })
 
-  const timerId = setInterval(gameEngine, 50)
+  const timerId = setInterval(gameEngine, 10)
 
 }
 
@@ -43,8 +43,8 @@ function Platform() {
   this.direction = 0
   this.left = 250
   this.width = 100
-  this.speed = 24
-  this.top = 770
+  this.speed = 5.8
+  this.top = 780
 
   this.move = function () {
 
@@ -64,8 +64,8 @@ const platform = new Platform()
 
 function Ball() {
 
-  this.speedX = -45;
-  this.speedY = -30;
+  this.speedX = -2;
+  this.speedY = -4;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -88,7 +88,7 @@ function Ball() {
   }
 
   this.collidesWithLateralWalls = function () {
-    if (this.left + this.width >= 600 || this.left <= 0) {
+    if (this.left + this.width > 600 || this.left < 0) {
       this.speedX *= (-1);
     }
   }
@@ -104,12 +104,15 @@ function Ball() {
       && this.left <= blockCollectionInstance.left + blockCollectionInstance.width // derecha
       && this.top + this.height >= blockCollectionInstance.top) // arriba 
     {
-      this.speedX *= (-1)
-      this.speedY *= (-1)
+      //this.speedX *= (-1)
+      //this.speedY *= (-1)
       //document.querySelector('.row0').parentNode.removeChild(document.querySelector('.row0'))
       blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
       
     }
+  }
+  this.collidesWithBottom = function () {
+    if(this.top + this.height > 800) this.speedY *= -1
   }
 
   /*this.collidesWithTopOrBotBlock = function (){
@@ -123,7 +126,7 @@ function Ball() {
 
 
   this.move = function () {
-    if (!this.collidesWithPlatform() && !this.collidesWithLateralWalls() && !this.collidesWithTopWall() && !this.collidesWithBlocks()) {
+    if (!this.collidesWithPlatform() && !this.collidesWithLateralWalls() && !this.collidesWithTopWall() && !this.collidesWithBlocks() && !this.collidesWithBottom()) {
       this.left += this.speedX;
       this.sprite.style.left = this.left + "px";
       this.top += this.speedY;
@@ -153,7 +156,9 @@ function Block(width, height, top, left, i, j) {
   }
   this.delete = function (i, j) {
     const blockToRemove = document.querySelector(`.column${i}${j}`);
-    blockToRemove.parentNode.removeChild(blockToRemove);
+    if (blockToRemove !== null){
+      blockToRemove.parentNode.removeChild(blockToRemove);
+    } 
   }
 }
 
@@ -162,33 +167,37 @@ function BlockCollection(width, height, rows, columns, left, top) {
   this.blocks    = []
   this.width     = width
   this.height    = height
-  this.top       = top
-  this.left      = left
-  this.sprite    = document.querySelector(".blocks")
-  this.sprite.style.top = this.top + "px";
-  this.sprite.style.left = this.left + "px";
+  this.top       = 0
+  this.left      = 0
   this.rows      = rows
   this.columns   = columns
+  this.draw      = function () {
+    this.sprite = document.querySelector(".blocks")
+    this.sprite.style.top = this.top + "px";
+    this.sprite.style.left = this.left + "px";
+    this.sprite.style.width = this.width + "px";
+    this.sprite.style.height = this.height + "px";
+  }
 
   this.generateBlockCollection = function () {
 
     let stringResult = '';
 
     for (var i = 0; i < this.rows; i++) {
-      stringResult += `<div class="row${i}">`;
+     // stringResult += `<div class="row${i}">`;
       for (var j = 0; j < this.columns; j++) {
         stringResult += `<div class="col column${i}${j}"></div>`;
         let blockToInsert = 
           new Block(this.width / this.columns, 
           this.height / this.rows, 
-          this.top + (this.height / this.rows)*i,
-          this.left + (this.width / this.columns)*j,
+          (this.height / this.rows)*i,
+          (this.width / this.columns)*j,
           i,
           j
         )
         this.blocks.push(blockToInsert)
       }
-      stringResult += '</div>' 
+      //stringResult += '</div>' 
     }
     return stringResult;
   }
@@ -196,24 +205,34 @@ function BlockCollection(width, height, rows, columns, left, top) {
     this.blocks.forEach (function (block) {block.draw()})
   }
   this.removeBlock = function (ballTop, ballLeft, ballWidth, ballHeight) {
-    let ballToRemove;
-    this.blocks.forEach((block) => {
-      console.log(block)
-      if(ballTop <= block.top + block.height // abajo
-        && ballLeft + ballWidth >= block.left // izquierda
-        && ballLeft <= block.left + block.width // derecha
-        && ballTop + ballHeight >= block.top) // arriba
-      {
-        console.log(block.i, block.j)
-      block.delete(block.i, block.j);}
-    })
-  }
-}
 
-const blockCollectionInstance = new BlockCollection(240, 240, 3, 3, 250, 60);
+    for ( let i=0; i<this.blocks.length; i++){
+
+      if (ballTop <= this.blocks[i].top + this.blocks[i].height // abajo
+        && ballLeft + ballWidth >= this.blocks[i].left // izquierda
+        && ballLeft <= this.blocks[i].left + this.blocks[i].width // derecha
+        && ballTop + ballHeight >= this.blocks[i].top) // arriba
+      { 
+        console.log(this.blocks[i])
+        this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j); 
+        this.blocks.splice(i,1)
+        ball.speedX *= -1
+        ball.speedY *= -1
+        console.log(this.blocks)
+        break
+      } else{
+        console.log("no he eliminado nada")
+      }
+    }
+      
+    }
+  }
+
+
+const blockCollectionInstance = new BlockCollection(480, 240, 3, 3, 60, 60);
+
 //const blockCollectionInstance = new BlockCollection(120, 120, 1, 1, 200, 120);
 const blockHTML = document.querySelector('.blocks');
-console.log(blockCollectionInstance.generateBlockCollection())
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
 blockCollectionInstance.drawAllBlocks()
 console.log(blockCollectionInstance.blocks);
