@@ -1,8 +1,13 @@
+
+var timerId 
 const initialText = document.querySelector('.start');
 let pos = 235
 var gameStarted = false
 document.addEventListener('keyup', function (event) {
-  if (event.key === "g") initialText.parentNode.removeChild(initialText);
+  if (event.key === "g") {
+  //  initialText.parentNode.removeChild(initialText);
+  initialText.style.display = "none" 
+  }
   if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
     platform.direction = null
   }
@@ -13,6 +18,16 @@ document.addEventListener('keyup', function (event) {
 
 
 })
+
+function gameOver (){
+
+clearInterval(timerId);
+console.log("Se acabó ")
+initialText.style.display = 'block'
+var finalText = document.querySelector(".game-over-text");
+finalText.style.display = 'block'
+}
+
 
 function startGame() {
 
@@ -28,7 +43,7 @@ function startGame() {
     }
   })
 
-  const timerId = setInterval(gameEngine, 10)
+  timerId = setInterval(gameEngine, 10)
 
 }
 
@@ -112,11 +127,14 @@ function Ball() {
     }
   }
   this.collidesWithBottom = function () {
-    if(this.top + this.height > 800) this.speedY *= -1
+    if(this.top + this.height > 800) {
+      gameOver()
+    }
   }
 
   /*this.collidesWithTopOrBotBlock = function (){
-    if ((this.top <= blockCollectionInstance.top + blockCollectionInstance.height 
+    if ((this.top <= b
+      lockCollectionInstance.top + blockCollectionInstance.height 
       || this.top + this.height <= blockCollectionInstance.top)
     &&  (this.left + this.width >= blockCollectionInstance.left
     &&  this.left <= blockCollectionInstance.left + blockCollectionInstance.width))
