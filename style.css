@@ -37,7 +37,12 @@
     margin-top: 60%;
     font-weight: bold;
 }
-
+img{
+    width: 300px;
+    margin-top: 50%;
+    margin: 0 auto;
+    display: block;
+}
 
 .ball {
     position: absolute;
@@ -48,14 +53,28 @@
     top: 600px;
     left: 288px;
 }
-
+.victory-text{
+    margin-top: 50%;
+    display: block;
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+}
 .blocks {
     position: absolute;
     background-color: rgba(0,0,0, 0);
     
 }
 
-
+.victory{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    top: 0;
+    background-color: rgba(241, 221, 34, 0.8);
+    display: none;
+}
 
 [class^='row'] {
     

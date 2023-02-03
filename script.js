@@ -2,36 +2,37 @@
 var timerId 
 const initialText = document.querySelector('.start');
 let pos = 235
-var gameStarted = false
+var gameStarted = -1
 document.addEventListener('keyup', function (event) {
-  if (event.key === "g") {
-  //  initialText.parentNode.removeChild(initialText);
   initialText.style.display = "none" 
+  if (gameStarted === -1) {
+    startGame();
+    gameStarted = 1
   }
-  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' && gameStarted === 1) {
     platform.direction = null
   }
-  if (!gameStarted) {
-    startGame();
-    gameStarted = true
+  if(gameStarted === 0){
+    this.location.reload();
   }
-
-
 })
 
 function gameOver (){
-
   clearInterval(timerId);
   console.log("Se acabó ")
   initialText.style.display = 'block'
   var finalText = document.querySelector(".game-over-text");
   finalText.style.display = 'block'
+  gameStarted = 0;
 }
 
+function victory (){
+  clearInterval(timerId)
+  document.querySelector('.victory').style.display = 'block'
+  gameStarted = 0;
+}
 
 function startGame() {
-
-
   document.addEventListener('keydown', function (event) {
 
     if (event.key === 'ArrowRight') {
@@ -62,16 +63,12 @@ function Platform() {
   this.top = 780
 
   this.move = function () {
-
     if (this.direction === -1 && this.left <= this.speed
       || this.direction ===
       1 && this.left >= 600 - this.width - this.speed)
       this.direction = 0;
-
     this.left += this.direction * this.speed
     this.sprite.style.left = this.left + 'px'
-
-
   }
 }
 
@@ -119,11 +116,7 @@ function Ball() {
       && this.left <= blockCollectionInstance.left + blockCollectionInstance.width // derecha
       && this.top + this.height >= blockCollectionInstance.top) // arriba 
     {
-      //this.speedX *= (-1)
-      //this.speedY *= (-1)
-      //document.querySelector('.row0').parentNode.removeChild(document.querySelector('.row0'))
       blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
-      
     }
   }
   this.collidesWithBottom = function () {
@@ -131,17 +124,6 @@ function Ball() {
       gameOver()
     }
   }
-
-  /*this.collidesWithTopOrBotBlock = function (){
-    if ((this.top <= b
-      lockCollectionInstance.top + blockCollectionInstance.height 
-      || this.top + this.height <= blockCollectionInstance.top)
-    &&  (this.left + this.width >= blockCollectionInstance.left
-    &&  this.left <= blockCollectionInstance.left + blockCollectionInstance.width))
-      this.speedX *= (-1)
-      this.speedY *= (-1)
-  }*/
-
 
   this.move = function () {
     if (!this.collidesWithPlatform() && !this.collidesWithLateralWalls() && !this.collidesWithTopWall() && !this.collidesWithBlocks() && !this.collidesWithBottom()) {
@@ -202,7 +184,6 @@ function BlockCollection(width, height, rows, columns, left, top) {
     let stringResult = '';
 
     for (var i = 0; i < this.rows; i++) {
-     // stringResult += `<div class="row${i}">`;
       for (var j = 0; j < this.columns; j++) {
         stringResult += `<div class="col column${i}${j}"></div>`;
         let blockToInsert = 
@@ -215,7 +196,6 @@ function BlockCollection(width, height, rows, columns, left, top) {
         )
         this.blocks.push(blockToInsert)
       }
-      //stringResult += '</div>' 
     }
     return stringResult;
   }
@@ -234,8 +214,9 @@ function BlockCollection(width, height, rows, columns, left, top) {
         console.log(this.blocks[i])
         this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j); 
         this.blocks.splice(i,1)
-        ball.speedX *= -1
-        ball.speedY *= -1
+        if(this.blocks.length === 0) victory();
+        ball.speedX *= -1.03
+        ball.speedY *= -1.03
         console.log(this.blocks)
         break
       } else{
@@ -247,7 +228,7 @@ function BlockCollection(width, height, rows, columns, left, top) {
   }
 
 
-const blockCollectionInstance = new BlockCollection(480, 240, 5, 5, 100, 100);
+const blockCollectionInstance = new BlockCollection(480, 240, 1, 2, 60, 60);
 
 //const blockCollectionInstance = new BlockCollection(120, 120, 1, 1, 200, 120);
 const blockHTML = document.querySelector('.blocks');
