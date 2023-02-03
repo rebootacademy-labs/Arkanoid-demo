@@ -1,10 +1,10 @@
 
-var timerId 
+var timerId
 const initialText = document.querySelector('.start');
 let pos = 235
 var gameStarted = -1
 document.addEventListener('keyup', function (event) {
-  initialText.style.display = "none" 
+  initialText.style.display = "none"
   if (gameStarted === -1) {
     startGame();
     gameStarted = 1
@@ -12,21 +12,20 @@ document.addEventListener('keyup', function (event) {
   if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' && gameStarted === 1) {
     platform.direction = null
   }
-  if(gameStarted === 0){
+  if (gameStarted === 0) {
     this.location.reload();
   }
 })
 
-function gameOver (){
+function gameOver() {
   clearInterval(timerId);
-  console.log("Se acabó ")
   initialText.style.display = 'block'
   var finalText = document.querySelectorAll(".invisible-text");
   finalText.forEach(e => e.style.display = 'inline')
   gameStarted = 0;
 }
 
-function victory (){
+function victory() {
   clearInterval(timerId)
   document.querySelector('.victory').style.display = 'block'
   var finalText = document.querySelectorAll(".victory .invisible-text");
@@ -113,7 +112,7 @@ function Ball() {
     }
   }
   this.collidesWithBlocks = function () {
-    if (this.top <= blockCollectionInstance.top + (blockCollectionInstance.top/blockCollectionInstance.rows) + blockCollectionInstance.height // abajo
+    if (this.top <= blockCollectionInstance.top + (blockCollectionInstance.top / blockCollectionInstance.rows) + blockCollectionInstance.height // abajo
       && this.left + this.width >= blockCollectionInstance.left // izquierda
       && this.left <= blockCollectionInstance.left + blockCollectionInstance.width // derecha
       && this.top + this.height >= blockCollectionInstance.top) // arriba 
@@ -122,7 +121,7 @@ function Ball() {
     }
   }
   this.collidesWithBottom = function () {
-    if(this.top + this.height > 800) {
+    if (this.top + this.height > 800) {
       gameOver()
     }
   }
@@ -141,7 +140,7 @@ const ball = new Ball();
 
 
 function Block(width, height, top, left, i, j) {
-  
+
   let self = this
   this.width = width
   this.height = height
@@ -149,31 +148,31 @@ function Block(width, height, top, left, i, j) {
   this.left = left
   this.i = i;
   this.j = j;
-  this.draw = function (){
+  this.draw = function () {
     this.sprite = document.querySelector(`.column${i}${j}`)
-    self.sprite.style.width  = self.width + 'px'
+    self.sprite.style.width = self.width + 'px'
     self.sprite.style.height = self.height + 'px'
-    self.sprite.style.top    = self.top + 'px'
-    self.sprite.style.left   = self.left + 'px'
+    self.sprite.style.top = self.top + 'px'
+    self.sprite.style.left = self.left + 'px'
   }
   this.delete = function (i, j) {
     const blockToRemove = document.querySelector(`.column${i}${j}`);
-    if (blockToRemove !== null){
+    if (blockToRemove !== null) {
       blockToRemove.parentNode.removeChild(blockToRemove);
-    } 
+    }
   }
 }
 
 function BlockCollection(width, height, rows, columns, left, top) {
 
-  this.blocks    = []
-  this.width     = width
-  this.height    = height
-  this.top       = top
-  this.left      = left
-  this.rows      = rows
-  this.columns   = columns
-  this.draw      = function () {
+  this.blocks = []
+  this.width = width
+  this.height = height
+  this.top = top
+  this.left = left
+  this.rows = rows
+  this.columns = columns
+  this.draw = function () {
     this.sprite = document.querySelector(".blocks")
     this.sprite.style.top = this.top + "px";
     this.sprite.style.left = this.left + "px";
@@ -188,51 +187,45 @@ function BlockCollection(width, height, rows, columns, left, top) {
     for (var i = 0; i < this.rows; i++) {
       for (var j = 0; j < this.columns; j++) {
         stringResult += `<div class="col column${i}${j}"></div>`;
-        let blockToInsert = 
-          new Block(this.width / this.columns, 
-          this.height / this.rows, 
-          (this.height / this.rows)*i,
-          (this.width / this.columns)*j,
-          i,
-          j
-        )
+        let blockToInsert =
+          new Block(this.width / this.columns,
+            this.height / this.rows,
+            (this.height / this.rows) * i,
+            (this.width / this.columns) * j,
+            i,
+            j
+          )
         this.blocks.push(blockToInsert)
       }
     }
     return stringResult;
   }
   this.drawAllBlocks = function () {
-    this.blocks.forEach (function (block) {block.draw()})
+    this.blocks.forEach(function (block) { block.draw() })
   }
   this.removeBlock = function (ballTop, ballLeft, ballWidth, ballHeight) {
 
-    for ( let i=0; i<this.blocks.length; i++){
+    for (let i = 0; i < this.blocks.length; i++) {
 
       if (ballTop <= this.blocks[i].top + this.blocks[i].height + this.top // abajo
         && ballLeft + ballWidth >= this.blocks[i].left + this.left // izquierda
         && ballLeft <= this.blocks[i].left + this.blocks[i].width + this.left // derecha
         && ballTop + ballHeight >= this.blocks[i].top + this.top) // arriba
-      { 
-        console.log(this.blocks[i])
-        this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j); 
-        this.blocks.splice(i,1)
-        if(this.blocks.length === 0) victory();
+      {
+        this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j);
+        this.blocks.splice(i, 1)
+        if (this.blocks.length === 0) victory();
         ball.speedX *= -1.03
         ball.speedY *= -1.03
-        console.log(this.blocks)
         break
-      } else{
-        console.log("no he eliminado nada")
       }
     }
-      
-    }
   }
+}
 
 
-const blockCollectionInstance = new BlockCollection(480, 240, 1, 2, 60, 60);
+const blockCollectionInstance = new BlockCollection(480, 240, 2, 2, 60, 60);
 
-//const blockCollectionInstance = new BlockCollection(120, 120, 1, 1, 200, 120);
 const blockHTML = document.querySelector('.blocks');
 blockCollectionInstance.draw();
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
