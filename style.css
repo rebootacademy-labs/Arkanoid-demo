@@ -91,7 +91,7 @@ img{
     
 }
 
-.game-over-text{
+.invisible-text{
     display: none;
     color: yellow;
 }

@@ -21,14 +21,16 @@ function gameOver (){
   clearInterval(timerId);
   console.log("Se acabó ")
   initialText.style.display = 'block'
-  var finalText = document.querySelector(".game-over-text");
-  finalText.style.display = 'block'
+  var finalText = document.querySelectorAll(".invisible-text");
+  finalText.forEach(e => e.style.display = 'inline')
   gameStarted = 0;
 }
 
 function victory (){
   clearInterval(timerId)
   document.querySelector('.victory').style.display = 'block'
+  var finalText = document.querySelectorAll(".victory .invisible-text");
+  finalText.forEach(e => e.style.display = 'inline')
   gameStarted = 0;
 }
 
