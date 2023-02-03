@@ -28,7 +28,7 @@ function startGame() {
     }
   })
 
-  const timerId = setInterval(gameEngine, 50)
+  const timerId = setInterval(gameEngine, 10)
 
 }
 
@@ -43,8 +43,8 @@ function Platform() {
   this.direction = 0
   this.left = 250
   this.width = 100
-  this.speed = 24
-  this.top = 770
+  this.speed = 5.8
+  this.top = 780
 
   this.move = function () {
 
@@ -64,8 +64,8 @@ const platform = new Platform()
 
 function Ball() {
 
-  this.speedX = -15;
-  this.speedY = -30;
+  this.speedX = -2;
+  this.speedY = -4;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -88,7 +88,7 @@ function Ball() {
   }
 
   this.collidesWithLateralWalls = function () {
-    if (this.left + this.width >= 600 || this.left <= 0) {
+    if (this.left + this.width > 600 || this.left < 0) {
       this.speedX *= (-1);
     }
   }
@@ -111,6 +111,9 @@ function Ball() {
       
     }
   }
+  this.collidesWithBottom = function () {
+    if(this.top + this.height > 800) this.speedY *= -1
+  }
 
   /*this.collidesWithTopOrBotBlock = function (){
     if ((this.top <= blockCollectionInstance.top + blockCollectionInstance.height 
@@ -123,7 +126,7 @@ function Ball() {
 
 
   this.move = function () {
-    if (!this.collidesWithPlatform() && !this.collidesWithLateralWalls() && !this.collidesWithTopWall() && !this.collidesWithBlocks()) {
+    if (!this.collidesWithPlatform() && !this.collidesWithLateralWalls() && !this.collidesWithTopWall() && !this.collidesWithBlocks() && !this.collidesWithBottom()) {
       this.left += this.speedX;
       this.sprite.style.left = this.left + "px";
       this.top += this.speedY;
@@ -210,10 +213,12 @@ function BlockCollection(width, height, rows, columns, left, top) {
         && ballLeft <= this.blocks[i].left + this.blocks[i].width // derecha
         && ballTop + ballHeight >= this.blocks[i].top) // arriba
       { 
+        console.log(this.blocks[i])
         this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j); 
         this.blocks.splice(i,1)
         ball.speedX *= -1
         ball.speedY *= -1
+        console.log(this.blocks)
         break
       } else{
         console.log("no he eliminado nada")
@@ -226,10 +231,8 @@ function BlockCollection(width, height, rows, columns, left, top) {
 
 const blockCollectionInstance = new BlockCollection(480, 240, 3, 3, 60, 60);
 
-blockCollectionInstance.draw()
 //const blockCollectionInstance = new BlockCollection(120, 120, 1, 1, 200, 120);
 const blockHTML = document.querySelector('.blocks');
-console.log(blockCollectionInstance.generateBlockCollection())
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
 blockCollectionInstance.drawAllBlocks()
 console.log(blockCollectionInstance.blocks);

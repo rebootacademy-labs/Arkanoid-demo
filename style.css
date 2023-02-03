@@ -15,10 +15,10 @@
 
 .platform {
     position: absolute;
-    top: 770px;
+    top: 780px;
     left: 250px;
     width: 100px;
-    height: 20px;
+    height: 10px;
     background-color: red;
 }
 
