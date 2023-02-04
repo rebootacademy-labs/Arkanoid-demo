@@ -1,6 +1,6 @@
 function Ball() {
-  this.speedX = 2.5;
-  this.speedY = 2.7;
+  this.speedX = 0;
+  this.speedY = -2;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -41,7 +41,48 @@ function Ball() {
       && this.left <= blockCollectionInstance.left + blockCollectionInstance.width // derecha
       && this.top + this.height >= blockCollectionInstance.top) // arriba 
     {
-      blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
+      
+      let blockRemoved = blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
+      console.log(blockRemoved)
+      if(blockRemoved !== undefined){
+        console.log("estoy dentro")
+        //Tocó por abajo
+        if(this.top <= blockRemoved.top + (blockCollectionInstance.top / blockCollectionInstance.rows) + blockCollectionInstance.height  //abajo
+        ) //derecha
+        {
+          this.speedY *= (-1)
+          this.top += 1;
+          console.log("choco por abajo")
+        }
+        //Tocó por la derecha
+        else if(this.top <= blockRemoved.top + (blockCollectionInstance.top / blockCollectionInstance.rows) + blockCollectionInstance.height //abajo
+        && this.left <= blockRemoved.left + blockRemoved.width //derecha 
+        && this.top <= blockRemoved.top + (blockCollectionInstance.top /blockCollectionInstance.rows) + blockCollectionInstance.height) //arriba
+        {
+          this.speedX *= (-1);
+          this.left += 1;
+          console.log("choco por la derecha")
+        }
+        //Tocó por la izquierda
+        else if(this.top <= blockRemoved.top + (blockCollectionInstance.top / blockCollectionInstance.rows) + blockCollectionInstance.height //abajo
+        && this.top <= blockRemoved.top + (blockCollectionInstance.top /blockCollectionInstance.rows) + blockCollectionInstance.height //arriba
+        && this.left + this.width >= blockRemoved.left  //izquierda
+        ){
+          this.speedX *= (-1);
+          this.left -= 1;
+          console.log("choco por la izquierda")
+        }
+        
+         //Tocó por arriba
+        else if(this.top <= blockRemoved.top + (blockCollectionInstance.top /blockCollectionInstance.rows) + blockCollectionInstance.height //arriba
+        && this.left + this.width >= blockRemoved.left  //izquierda
+        && this.left <= blockRemoved.left + blockRemoved.width //derecha 
+        ){
+          this.speedY *= (-1);
+          this.top -= 1;
+          console.log("choco por arriba")
+        } 
+      }
     }
   }
   this.collidesWithBottom = function () {

@@ -33,6 +33,8 @@
     animation-duration: 4s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    border: 1px solid black;
+    box-sizing: border-box;
 }
 .eyes:last-child{
     margin-left: 62px;
