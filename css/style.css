@@ -52,6 +52,7 @@ img{
     background-color: #57b7cc;
     top: 600px;
     left: 288px;
+    /*box-shadow: -5px -5px rgba(116, 197, 215, 0.5), -8px -8px rgba(134, 201, 215,0.4), -10px -10px rgba(150, 206, 217, 0.3);*/
 }
 .victory-text{
     margin-top: 50%;
@@ -84,7 +85,7 @@ img{
     }
 
 [class^='col']{
-   position: absolute;
+    position: absolute;
     background-color: #57b7cc;
     box-sizing: border-box;
     border: 1px solid black;
@@ -98,4 +99,8 @@ img{
 
 .emphasize-text {
     color: red;
+}
+
+ .column5-1, .column5-3,.column1-1, .column1-2, .column1-3, .column2-1, .column3-1, .column2-3, .column4-1, .column4-3, .column3-2{
+    background-color: #fff;
 }

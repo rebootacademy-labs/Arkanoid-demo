@@ -18,6 +18,7 @@ function Ball() {
     if (this.top + this.height >= platform.top
       && this.left <= platform.left + platform.width
       && this.left + this.width >= platform.left) {
+      //this.sprite.style.boxShadow = '-5px 5px rgba(116, 197, 215, 0.5), -8px 8px rgba(134, 201, 215,0.4), -10px 10px rgba(150, 206, 217, 0.3)'
       this.speedY *= (-1);
       this.top -= 1;
     }
