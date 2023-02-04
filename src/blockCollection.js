@@ -7,6 +7,7 @@ function BlockCollection(width, height, rows, columns, left, top) {
   this.left = left
   this.rows = rows
   this.columns = columns
+
   this.draw = function () {
     if(this.i === 1 && this.j === 10) console.log(this)
     this.sprite = document.querySelector(".blocks")
@@ -17,7 +18,6 @@ function BlockCollection(width, height, rows, columns, left, top) {
   }
 
   this.generateBlockCollection = function () {
-
     let stringResult = '';
 
     for (var i = 0; i < this.rows; i++) {
@@ -43,9 +43,7 @@ function BlockCollection(width, height, rows, columns, left, top) {
   }
 
   this.removeBlock = function (ballTop, ballLeft, ballWidth, ballHeight) {
-
     for (let i = 0; i < this.blocks.length; i++) {
-
       if (ballTop <= this.blocks[i].top + this.blocks[i].height + this.top // abajo
         && ballLeft + ballWidth >= this.blocks[i].left + this.left // izquierda
         && ballLeft <= this.blocks[i].left + this.blocks[i].width + this.left // derecha

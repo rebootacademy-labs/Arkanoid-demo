@@ -19,10 +19,38 @@
     top: 780px;
     left: 250px;
     width: 100px;
-    height: 10px;
+    height: 15px;
     background-color: #57b7cc;
+    padding: 0;
 }
-
+.eyes{
+    background-color: white;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: inline-block;
+    animation-name: giveLifeToEyes;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.eyes:last-child{
+    margin-left: 62px;
+}
+.eyes:first-child{
+    margin-left: 5px;
+}
+.pupil{
+    margin-left: 30%;
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 40%;
+    animation-name: giveLifeToPupils;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-delay: 1s;
+}
 .start{
     position: absolute;
     width: 100%;
@@ -101,6 +129,30 @@ img{
     color: red;
 }
 
- .column5-1, .column5-3,.column1-1, .column1-2, .column1-3, .column2-1, .column3-1, .column2-3, .column4-1, .column4-3, .column3-2{
+.column5-1, .column5-3,.column1-1, .column1-2, .column1-3, .column2-1, .column3-1, .column2-3, .column4-1, .column4-3, .column3-2, .column1-5, .column1-6, .column1-7, .column2-5,.column3-5, .column3-6, .column4-5, .column5-5, .column5-6, .column5-7, .column3-7{
     background-color: #fff;
+}
+
+@keyframes giveLifeToPupils {
+    0% {margin-left: 30%;}
+    16% {margin-left: 28%;}
+    33% {margin-left: 25%;}
+    51% {margin-left: 30%;}
+    66% {margin-left: 35%;}
+    83% {margin-left: 33%;}
+    100% {margin-left: 30%;}
+  }
+
+@keyframes giveLifeToEyes {
+    0% {background-color: #fff;}
+    0.25% {background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);}
+    0.5% {background: linear-gradient(180deg, rgba(0,0,0,1) 25%, rgba(255,255,255,1) 100%);}
+    0.75% {background: linear-gradient(180deg, rgba(0,0,0,1) 50%, rgba(255,255,255,1) 100%);}
+    1% {background: linear-gradient(180deg, rgba(0,0,0,1) 75%, rgba(255,255,255,1) 100%);}
+    1.25% {background: linear-gradient(180deg, rgba(0,0,0,1) 100%, rgba(255,255,255,1) 100%);}
+    1.5% {background: linear-gradient(180deg, rgba(0,0,0,1) 75%, rgba(255,255,255,1) 100%);}
+    1.75% {background: linear-gradient(180deg, rgba(0,0,0,1) 50%, rgba(255,255,255,1) 100%);}
+    2% {background: linear-gradient(180deg, rgba(0,0,0,1) 25%, rgba(255,255,255,1) 100%);}
+    2.25% {background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);}
+    2.5% {background: #fff;}
 }

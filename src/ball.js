@@ -1,6 +1,6 @@
 function Ball() {
-  this.speedX = 1;
-  this.speedY = 1;
+  this.speedX = 2.5;
+  this.speedY = 2.7;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -56,12 +56,6 @@ function Ball() {
       this.sprite.style.left = this.left + "px";
       this.top += this.speedY;
       this.sprite.style.top = this.top + "px";
-      this.sprite.style.animate([
-        {color: 'black'}
-      ],{
-        duration: 2000,
-        iterations: Infinity
-    })
     }
   }
 }
