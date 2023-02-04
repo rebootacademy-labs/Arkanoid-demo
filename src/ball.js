@@ -1,7 +1,6 @@
 function Ball() {
-
-  this.speedX = -2;
-  this.speedY = -4;
+  this.speedX = 1;
+  this.speedY = 1;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -17,9 +16,10 @@ function Ball() {
   }
   this.collidesWithPlatform = function () { // el top ball + hight ball != top de platform*/
     if (this.top + this.height >= platform.top
-      && this.left >= platform.left
-      && this.left + this.width <= platform.left + platform.width) {
+      && this.left <= platform.left + platform.width
+      && this.left + this.width >= platform.left) {
       this.speedY *= (-1);
+      this.top -= 1;
     }
   }
 
@@ -55,6 +55,12 @@ function Ball() {
       this.sprite.style.left = this.left + "px";
       this.top += this.speedY;
       this.sprite.style.top = this.top + "px";
+      this.sprite.style.animate([
+        {color: 'black'}
+      ],{
+        duration: 2000,
+        iterations: Infinity
+    })
     }
   }
 }

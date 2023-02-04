@@ -8,6 +8,7 @@ function BlockCollection(width, height, rows, columns, left, top) {
   this.rows = rows
   this.columns = columns
   this.draw = function () {
+    if(this.i === 1 && this.j === 10) console.log(this)
     this.sprite = document.querySelector(".blocks")
     this.sprite.style.top = this.top + "px";
     this.sprite.style.left = this.left + "px";
@@ -21,7 +22,7 @@ function BlockCollection(width, height, rows, columns, left, top) {
 
     for (var i = 0; i < this.rows; i++) {
       for (var j = 0; j < this.columns; j++) {
-        stringResult += `<div class="col column${i}${j}"></div>`;
+        stringResult += `<div class="col column${i}-${j}"></div>`;
         let blockToInsert =
           new Block(this.width / this.columns,
             this.height / this.rows,
@@ -30,14 +31,17 @@ function BlockCollection(width, height, rows, columns, left, top) {
             i,
             j
           )
+        if(i === 1 && j === 10) console.log(blockToInsert);
         this.blocks.push(blockToInsert)
       }
     }
     return stringResult;
   }
+
   this.drawAllBlocks = function () {
     this.blocks.forEach(function (block) { block.draw() })
   }
+
   this.removeBlock = function (ballTop, ballLeft, ballWidth, ballHeight) {
 
     for (let i = 0; i < this.blocks.length; i++) {
