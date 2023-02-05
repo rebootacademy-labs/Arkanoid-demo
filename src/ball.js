@@ -1,6 +1,6 @@
 function Ball() {
-  this.speedX = 0;
-  this.speedY = -2;
+  this.speedX = 3;
+  this.speedY = -3;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -45,43 +45,9 @@ function Ball() {
       let blockRemoved = blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
       console.log(blockRemoved)
       if(blockRemoved !== undefined){
-        console.log("estoy dentro")
-        //Tocó por abajo
-        if(this.top <= blockRemoved.top + (blockCollectionInstance.top / blockCollectionInstance.rows) + blockCollectionInstance.height  //abajo
-        ) //derecha
-        {
-          this.speedY *= (-1)
-          this.top += 1;
-          console.log("choco por abajo")
-        }
-        //Tocó por la derecha
-        else if(this.top <= blockRemoved.top + (blockCollectionInstance.top / blockCollectionInstance.rows) + blockCollectionInstance.height //abajo
-        && this.left <= blockRemoved.left + blockRemoved.width //derecha 
-        && this.top <= blockRemoved.top + (blockCollectionInstance.top /blockCollectionInstance.rows) + blockCollectionInstance.height) //arriba
-        {
-          this.speedX *= (-1);
-          this.left += 1;
-          console.log("choco por la derecha")
-        }
-        //Tocó por la izquierda
-        else if(this.top <= blockRemoved.top + (blockCollectionInstance.top / blockCollectionInstance.rows) + blockCollectionInstance.height //abajo
-        && this.top <= blockRemoved.top + (blockCollectionInstance.top /blockCollectionInstance.rows) + blockCollectionInstance.height //arriba
-        && this.left + this.width >= blockRemoved.left  //izquierda
-        ){
-          this.speedX *= (-1);
-          this.left -= 1;
-          console.log("choco por la izquierda")
-        }
-        
-         //Tocó por arriba
-        else if(this.top <= blockRemoved.top + (blockCollectionInstance.top /blockCollectionInstance.rows) + blockCollectionInstance.height //arriba
-        && this.left + this.width >= blockRemoved.left  //izquierda
-        && this.left <= blockRemoved.left + blockRemoved.width //derecha 
-        ){
-          this.speedY *= (-1);
-          this.top -= 1;
-          console.log("choco por arriba")
-        } 
+        if(Math.random() < 0.5) this.speedX *= (-1.005)
+        else this.speedY *= (-1.005)
+        platform.speed *= (1.0025)
       }
     }
   }

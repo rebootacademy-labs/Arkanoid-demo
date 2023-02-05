@@ -19,7 +19,6 @@ function BlockCollection(width, height, rows, columns, left, top) {
 
   this.generateBlockCollection = function () {
     let stringResult = '';
-
     for (var i = 0; i < this.rows; i++) {
       for (var j = 0; j < this.columns; j++) {
         stringResult += `<div class="col column${i}-${j}"></div>`;

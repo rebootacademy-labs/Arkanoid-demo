@@ -1,7 +1,7 @@
 const game = new Game();
 const ball = new Ball();
 const platform = new Platform();
-const blockCollectionInstance = new BlockCollection(480, 240, 15, 25, 60, 60);
+const blockCollectionInstance = new BlockCollection(480, 240, 15, 35, 60, 60);
 const blockHTML = document.querySelector('.blocks');
 blockCollectionInstance.draw();
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
