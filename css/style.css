@@ -1,13 +1,29 @@
 /*Main screen style*/
+html{
+    height: 100vh;
+    width: 100vw;
+}
 .screen{
     background-image: url("../resources/Caraturla-2.png");
-    height: 100vh;
     background-size: cover;
+    height: 100vh;
+    width: 100vw;
     color: white;
     position: relative;
+    margin: 0 auto;
+}
+.animate-screen{
+    animation-name: animateScreen;
+    animation-duration: 4.3s;
 }
 
-.screen >p{
+@keyframes animateScreen {
+    0% {width: 100%; opacity: 1}
+    70% {width: 100px; opacity: 0}
+    100% {width: 99px; opacity: 0}
+}
+
+#text-to-hide{
     position: absolute;
     top: 75%;
     left: 9.5%;
@@ -17,7 +33,6 @@
     animation-name: neon-effect;
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
-
 }     
 
 @keyframes neon-effect {
@@ -37,10 +52,10 @@
 
 
 /* game style*/
-body{
-    background-image: url('../resources/Body-juego.png');
-    background-size: cover;
-    width: 100%;
+body,html{
+
+    background-color: black;
+    overflow: hidden;
 }
 
 .score-div{
