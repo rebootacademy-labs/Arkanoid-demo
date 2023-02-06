@@ -9,7 +9,6 @@ function BlockCollection(width, height, rows, columns, left, top) {
   this.columns = columns
 
   this.draw = function () {
-    if(this.i === 1 && this.j === 10) console.log(this)
     this.sprite = document.querySelector(".blocks")
     this.sprite.style.top = this.top + "px";
     this.sprite.style.left = this.left + "px";
@@ -48,15 +47,23 @@ function BlockCollection(width, height, rows, columns, left, top) {
         && ballLeft <= this.blocks[i].left + this.blocks[i].width + this.left // derecha
         && ballTop + ballHeight >= this.blocks[i].top + this.top) // arriba
       { 
+        game.addPoints();
         this.blocks[i].delete(this.blocks[i].i, this.blocks[i].j);
-        if (this.blocks.length === 1) game.gameVictory();
+        if (this.blocks.length === 1){
+          game.gameVictory();
+        } 
         return this.blocks.splice(i, 1)[0]
-        
-        //ball.speedX *= -1.03
-        //ball.speedY *= -1.03
+      
         
         break
       }
     }
+  }
+
+  this.restart = function () {
+    this.blocks = [];
+    blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
+    this.draw();
+    this.drawAllBlocks();
   }
 }

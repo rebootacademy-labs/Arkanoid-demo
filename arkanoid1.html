@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arkanoid</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="src/ball.js"></script>
+  <script defer src="src/platform.js"></script>
+  <script defer src="src/block.js"></script>
+  <script defer src="src/blockCollection.js"></script>
+  <script defer src="src/game.js"></script>
+  <script defer src="src/main.js"></script>
+</head>
+
+<body>
+  <div class="top-info">
+    <div class="score-info">
+      <div class="score">
+        <p>Score: </p>
+        <p class="score-text">0</p>
+      </div>
+      <div class="high-score">
+        <p>Record: </p>
+        <p class="record-text">0</p>
+      </div>
+      <div class="lives">
+        <p>Additional lives:</p>
+        <p class="lives-text">3</p>
+      </div>
+    </div>
+  </div>
+  <audio src=""></audio>
+  <audio id="blockCollisionAudio" src="./resources/colisión_bloque.mov"></audio>
+  <audio src="resources/audioFondo.mp3" autoplay height="0px" width="0px" type="audio/mp3"></audio>
+  <audio id="loseLifeAudio" src="./resources/loseLife.mp3"></audio>
+  <audio id="victoryAudio" src="./resources/victoryAudio.m4a"></audio>
+  <audio id="gameOverAudio" src="./resources/gameOverAudio.mov"></audio>
+
+  <div class="container">
+    <div class="canvas"></div>
+    <div class="platform">
+      <div class="eyes">
+        <div class="pupil"></div>
+      </div>
+      <div class="eyes">
+        <div class="pupil"></div>
+      </div>
+    </div>
+    <div class="ball"></div>
+
+    <div class="blocks">
+      
+    </div>
+    <div class="start">
+      <div class="start-text">
+        <span class="invisible-text">Game Over <br></span>
+        <span class="emphasize-text">Press any</span><br> keyboard key <br>to<span class="emphasize-text">
+          <span class="invisible-text">re</span>start</span> the game
+      </div>
+    </div>
+    <div class="victory">
+      <span class="victory-text">Congratulations<br>You are the winner!</span>
+      <img src="https://images.squarespace-cdn.com/content/v1/55806048e4b014e817c47363/1435939584513-MZJO1MJ7MIIUUFS1RUJA/Victory+logo1+%5BConverted%5D.png" alt="">
+      <span class="emphasize-text">Press any</span><br> keyboard key <br>to<span class="emphasize-text">
+        <span class="invisible-text">re</span>start</span> the game
+    </div>
+  </div>
+  
+</body>
+
+</html>

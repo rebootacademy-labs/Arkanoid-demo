@@ -3,7 +3,7 @@ function Platform() {
   this.direction = 0;
   this.left = 250;
   this.width = 100;
-  this.speed = 2.5;
+  this.speed = 5;
   this.top = 780;
 
   this.move = function () {
@@ -15,4 +15,12 @@ function Platform() {
     this.left += this.direction * this.speed;
     this.sprite.style.left = this.left + "px";
   };
+  
+  this.restartPosition = function () {
+    this.top = 780;
+    this.left = 250;
+    this.sprite.style.top = this.top + 'px'
+    this.sprite.style.left = this.left + 'px'
+
+  }
 }
