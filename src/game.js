@@ -44,7 +44,7 @@ function Game() {
     
     this.updatePanel();
     victoryAudio.play();
-    scoreHTML.innerText = 0;
+    this.gameStatus = -1
   };
 
   this.gameEngine = function () {
