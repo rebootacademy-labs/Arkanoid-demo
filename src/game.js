@@ -25,7 +25,9 @@ function Game() {
     document.querySelector('.start').style.display = 'block'
     var finalText = document.querySelectorAll(".invisible-text");
     finalText.forEach(e => e.style.display = 'inline')
-    this.gameStatus = 0;
+    this.updatePanel();
+    this.restart();
+    this.gameStatus = -1;
     gameOverAudio.play()
 
   };
@@ -42,5 +44,35 @@ function Game() {
   this.gameEngine = function () {
     platform.move()
     ball.move()
+  }
+
+  this.restart = function (){
+    ball.restartPosition();
+    platform.restartPosition();
+  }
+  this.loseLife = function (){
+    if(this.lives === 0) this.gameOver();
+    else {
+      clearInterval(this.timerId)
+      this.restart()
+      document.querySelector('.start').style.display = 'block'
+      var finalText = document.querySelectorAll(".invisible-text");
+      finalText.forEach(e => e.style.display = 'inline')
+      this.lives--
+      this.gameStatus = -1
+      livesHTML.innerText = this.lives
+    }
+  }
+
+  this.addPoints = function () {
+    this.score += 10;
+    scoreHTML.innerText = this.score;
+  }
+
+  this.updatePanel = function() {
+    this.lives = 3;
+    this.score = 0;
+    scoreHTML.innerText = this.score;
+    livesHTML.innerText = this.lives;
   }
 }

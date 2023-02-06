@@ -15,4 +15,12 @@ function Platform() {
     this.left += this.direction * this.speed;
     this.sprite.style.left = this.left + "px";
   };
+  
+  this.restartPosition = function () {
+    this.top = 780;
+    this.left = 250;
+    this.sprite.style.top = this.top + 'px'
+    this.sprite.style.left = this.left + 'px'
+
+  }
 }

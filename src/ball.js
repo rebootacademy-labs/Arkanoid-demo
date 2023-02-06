@@ -1,6 +1,6 @@
 function Ball() {
   this.speedX = 3;
-  this.speedY = -3;
+  this.speedY = 3;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -49,12 +49,13 @@ function Ball() {
         else this.speedY *= (-1)
         platform.speed *= (1.0025)
         blockCollisionAudio.play()
+        game.addPoints();
       }
     }
   }
   this.collidesWithBottom = function () {
     if (this.top + this.height > 800) {
-      game.gameOver()
+      game.loseLife()
     }
   }
 
@@ -65,5 +66,12 @@ function Ball() {
       this.top += this.speedY;
       this.sprite.style.top = this.top + "px";
     }
+  }
+  this.restartPosition = function (){
+    this.top = 600
+    this.left = 288
+    this.sprite.style.top = this.top + 'px'
+    this.sprite.style.left = this.left + 'px'
+
   }
 }

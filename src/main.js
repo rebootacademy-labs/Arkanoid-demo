@@ -10,6 +10,10 @@ const initialText = document.querySelector('.start');
 const blockCollisionAudio = document.querySelector("#blockCollisionAudio")
 const gameOverAudio = document.querySelector("#gameOverAudio")
 const victoryAudio = document.querySelector("#victoryAudio")
+const scoreHTML = document.querySelector('.score-text')
+const recordHTML = document.querySelector('.record-text')
+const livesHTML = document.querySelector('.lives-text')
+
 document.addEventListener('keyup', function (event) {
   initialText.style.display = "none"
   if (game.gameStatus === -1) {
@@ -20,6 +24,7 @@ document.addEventListener('keyup', function (event) {
     platform.direction = null
   }
   if (game.gameStatus === 0) {
-    this.location.reload();
+    /*this.location.reload();*/
+
   }
 })
