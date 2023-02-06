@@ -3,7 +3,7 @@ function Platform() {
   this.direction = 0;
   this.left = 250;
   this.width = 100;
-  this.speed = 2.5;
+  this.speed = 5;
   this.top = 780;
 
   this.move = function () {

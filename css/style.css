@@ -1,9 +1,53 @@
+/*Main screen style*/
+.screen{
+    background-image: url("../resources/Caraturla-2.png");
+    height: 100vh;
+    background-size: cover;
+    color: white;
+    position: relative;
+}
+
+.screen >p{
+    position: absolute;
+    top: 75%;
+    left: 9.5%;
+    font-size: 42px;
+    font-weight: bold;
+    text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
+    animation-name: neon-effect;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+
+}     
+
+@keyframes neon-effect {
+    0% {
+        text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
+        font-size: 42px;
+    }
+    50% {
+        text-shadow: 4px 4px #0a88d0, -4px -4px #0a88d0, 4px -4px #0a88d0, -4px 4px #0a88d0;
+        font-size: 44px;
+        }
+    100% {
+            text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
+            font-size: 42px;
+        }
+    }
+
+
+/* game style*/
+body{
+    background-color: black;
+}
 .container {
     height:800px;
     width: 600px;
     overflow: hidden;
     position: relative;
     margin: auto;
+    box-sizing: border-box;
+    border: 3px solid white;
 }
 
 .canvas {
@@ -40,7 +84,7 @@
     margin-left: 62px;
 }
 .eyes:first-child{
-    margin-left: 5px;https://www.codewars.com/users/Marinass27
+    margin-left: 5px;
 }
 .pupil{
     margin-left: 30%;
@@ -106,7 +150,7 @@ img{
     background-color: rgba(241, 221, 34, 0.8);
     display: none;
 }
-https://www.codewars.com/users/Marinass27
+
 [class^='row'] {
     
     box-sizing: content-box;
@@ -149,15 +193,41 @@ https://www.codewars.com/users/Marinass27
     background-color: #fff;
 }
 
-.column1-17, .column1-18, .column1-19, .column2-17, .column3-17, .column4-17, .column5-17, .column5-18, .column5-19,
-.column4-19, .column3-19, .column2-19 {
+.column1-17,
+.column1-18,
+.column1-19,
+.column2-17,
+.column3-17,
+.column4-17,
+.column5-17,
+.column5-18,
+.column5-19,
+.column4-19,
+.column3-19,
+.column2-19 {
     background-color: #fff;
 }
 
-.column1-21, .column1-22, .column1-23, .column2-22, .column3-22, .column4-22, .column5-22 {
+.column1-21,
+.column1-22,
+.column1-23,
+.column2-22,
+.column3-22,
+.column4-22,
+.column5-22 {
     background-color: #fff;
 }
-
+.column1-17,
+.column1-18,
+. .column1-21,
+.column1-22,
+.column1-23,
+.column2-22,
+.column3-22,
+.column4-22,
+.column5-22 {
+    background-color: #fff;
+}
  .column1-28, .column1-29, .column1-30,.column0-29, .column2-29, .column2-27, .column3-27, .column4-27, .column5-28, .column5-29,.column5-30, .column4-31,
 .column3-31, .column2-31{
     background-color: #fff;
