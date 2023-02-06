@@ -65,6 +65,7 @@ function Game() {
       this.lives--
       this.gameStatus = -1
       livesHTML.innerText = this.lives
+      loseLifeAudio.play();
     }
   }
 
