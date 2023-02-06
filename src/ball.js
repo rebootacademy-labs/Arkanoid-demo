@@ -70,6 +70,8 @@ function Ball() {
   this.restartPosition = function (){
     this.top = 600
     this.left = 288
+    this.speedX = 3
+    this.speedY = 3
     this.sprite.style.top = this.top + 'px'
     this.sprite.style.left = this.left + 'px'
 

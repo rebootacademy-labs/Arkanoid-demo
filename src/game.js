@@ -25,9 +25,11 @@ function Game() {
     document.querySelector('.start').style.display = 'block'
     var finalText = document.querySelectorAll(".invisible-text");
     finalText.forEach(e => e.style.display = 'inline')
+    if (this.isNewRecord()) this.record = this.score
     this.updatePanel();
     this.restart();
     this.gameStatus = -1;
+    blockCollectionInstance.restart();
     gameOverAudio.play()
 
   };
@@ -38,6 +40,8 @@ function Game() {
     var finalText = document.querySelectorAll(".victory .invisible-text");
     finalText.forEach(e => e.style.display = 'inline')
     this.gameStatus = 0;
+    if(this.isNewRecord()) this.record = this.score
+    this.updatePanel();
     victoryAudio.play()
   };
 
@@ -73,6 +77,11 @@ function Game() {
     this.lives = 3;
     this.score = 0;
     scoreHTML.innerText = this.score;
+    recordHTML.innerText = this.record;
     livesHTML.innerText = this.lives;
+  }
+
+  this.isNewRecord = function (){
+    return this.score > this.record;
   }
 }

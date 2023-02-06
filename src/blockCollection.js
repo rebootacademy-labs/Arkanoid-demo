@@ -9,7 +9,6 @@ function BlockCollection(width, height, rows, columns, left, top) {
   this.columns = columns
 
   this.draw = function () {
-    if(this.i === 1 && this.j === 10) console.log(this)
     this.sprite = document.querySelector(".blocks")
     this.sprite.style.top = this.top + "px";
     this.sprite.style.left = this.left + "px";
@@ -58,5 +57,12 @@ function BlockCollection(width, height, rows, columns, left, top) {
         break
       }
     }
+  }
+
+  this.restart = function () {
+    this.blocks = [];
+    blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
+    this.draw();
+    this.drawAllBlocks();
   }
 }
