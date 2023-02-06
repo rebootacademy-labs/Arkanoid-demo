@@ -1,6 +1,6 @@
 function Ball() {
-  this.speedX = 1;
-  this.speedY = 1;
+  this.speedX = 3;
+  this.speedY = -3;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -41,7 +41,14 @@ function Ball() {
       && this.left <= blockCollectionInstance.left + blockCollectionInstance.width // derecha
       && this.top + this.height >= blockCollectionInstance.top) // arriba 
     {
-      blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
+      
+      let blockRemoved = blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
+      console.log(blockRemoved)
+      if(blockRemoved !== undefined){
+        if(Math.random() < 0.5) this.speedX *= (-1.005)
+        else this.speedY *= (-1.005)
+        platform.speed *= (1.0025)
+      }
     }
   }
   this.collidesWithBottom = function () {
@@ -56,12 +63,6 @@ function Ball() {
       this.sprite.style.left = this.left + "px";
       this.top += this.speedY;
       this.sprite.style.top = this.top + "px";
-      this.sprite.style.animate([
-        {color: 'black'}
-      ],{
-        duration: 2000,
-        iterations: Infinity
-    })
     }
   }
 }

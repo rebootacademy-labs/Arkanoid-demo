@@ -14,7 +14,7 @@ function Game() {
       }
       
     })
-    this.timerId = setInterval(this.gameEngine, 15)
+    this.timerId = setInterval(this.gameEngine, 1)
   };
 
   this.gameOver = function () {
