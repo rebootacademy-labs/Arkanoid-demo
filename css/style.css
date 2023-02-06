@@ -113,7 +113,7 @@ body{
     text-align: center;
     height: 100%;
     top: 0;
-    background-color: rgba(61, 101, 233, 0.8);
+    background-color: rgba(61, 101, 233, 0);
 }
 .start-text{
     font-size: 48px;
@@ -300,4 +300,24 @@ img{
     2% {background: linear-gradient(180deg, rgba(0,0,0,1) 25%, rgba(255,255,255,1) 100%);}
     2.25% {background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);}
     2.5% {background: #fff;}
+}
+
+.score-info {
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+
+}
+
+.score-info>div {
+    font-size: 18px;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.top-info {
+    text-align: center;
+    background-color: black;
+    color: white;
 }

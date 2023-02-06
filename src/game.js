@@ -1,6 +1,9 @@
 function Game() {
   this.gameStatus = -1;
   this.timerId;
+  this.score = 0;
+  this.record = 0; 
+  this.lives = 3;
 
   this.startGame = function () {
     document.addEventListener('keydown', function (event) {
@@ -23,6 +26,8 @@ function Game() {
     var finalText = document.querySelectorAll(".invisible-text");
     finalText.forEach(e => e.style.display = 'inline')
     this.gameStatus = 0;
+    gameOverAudio.play()
+
   };
 
   this.gameVictory = function () {
@@ -31,6 +36,7 @@ function Game() {
     var finalText = document.querySelectorAll(".victory .invisible-text");
     finalText.forEach(e => e.style.display = 'inline')
     this.gameStatus = 0;
+    victoryAudio.play()
   };
 
   this.gameEngine = function () {

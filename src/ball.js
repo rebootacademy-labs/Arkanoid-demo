@@ -48,6 +48,7 @@ function Ball() {
         if(Math.random() < 0.5) this.speedX *= (-1)
         else this.speedY *= (-1)
         platform.speed *= (1.0025)
+        blockCollisionAudio.play()
       }
     }
   }

@@ -7,7 +7,9 @@ blockCollectionInstance.draw();
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
 blockCollectionInstance.drawAllBlocks()
 const initialText = document.querySelector('.start');
-
+const blockCollisionAudio = document.querySelector("#blockCollisionAudio")
+const gameOverAudio = document.querySelector("#gameOverAudio")
+const victoryAudio = document.querySelector("#victoryAudio")
 document.addEventListener('keyup', function (event) {
   initialText.style.display = "none"
   if (game.gameStatus === -1) {

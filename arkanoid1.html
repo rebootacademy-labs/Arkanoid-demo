@@ -16,21 +16,26 @@
 </head>
 
 <body>
-  <audio src="resources/audioFondo.mp3" alloW="autoplay" height="0px" width="0px" type="audio/mp3"></audio>
-  <div class="score-div">
-    <div class="current-score">
-      <p>Current score:</p>
-      <p>0</p>
-    </div>
-    <div class="high-score">
-      <p>Record score:</p>
-      <p>0</p>
-    </div>
-    <div class="current-lives">
-      <p>Current lives:</p>
-      <p>0</p>
+  <div class="top-info">
+    <div class="score-info">
+      <div class="score">
+        <p>Score: </p>
+        <p>0</p>
+      </div>
+      <div class="high-score">
+        <p>Record: </p>
+        <p>0</p>
+      </div>
+      <div class="lives">
+        <p>Additional lives:</p>
+        <p>3</p>
+      </div>
     </div>
   </div>
+  <audio id="blockCollisionAudio" src="./resources/colisión_bloque.mov"></audio>
+  <audio src="resources/audioFondo.mp3" autoplay height="0px" width="0px" type="audio/mp3"></audio>
+  <audio id="gameOverAudio" src="./resources/5039.mp3"></audio>
+  <audio id="victoryAudio" src="./resources/Audio Victorio.m4a"></audio>
   <div class="container">
     <div class="canvas"></div>
     <div class="platform">
