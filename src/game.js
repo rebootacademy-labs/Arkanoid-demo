@@ -41,8 +41,10 @@ function Game() {
     finalText.forEach(e => e.style.display = 'inline')
     this.gameStatus = 0;
     if(this.isNewRecord()) this.record = this.score
+    
     this.updatePanel();
-    victoryAudio.play()
+    victoryAudio.play();
+    scoreHTML.innerText = 0;
   };
 
   this.gameEngine = function () {

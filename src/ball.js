@@ -49,7 +49,7 @@ function Ball() {
         else this.speedY *= (-1)
         platform.speed *= (1.0025)
         blockCollisionAudio.play()
-        game.addPoints();
+        
       }
     }
   }
