@@ -14,6 +14,8 @@ const victoryAudio = document.querySelector("#victoryAudio")
 const scoreHTML = document.querySelector('.score-text')
 const recordHTML = document.querySelector('.record-text')
 const livesHTML = document.querySelector('.lives-text')
+const boing1 = document.querySelector('#boing1');
+const boing2 = document.querySelector('#boing2');
 
 document.addEventListener('keyup', function (event) {
   initialText.style.display = "none"

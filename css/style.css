@@ -27,7 +27,7 @@ html{
     position: absolute;
     top: 75%;
     left: 9.5%;
-    font-size: 42px;
+    font-size: 24px;
     font-weight: bold;
     text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
     animation-name: neon-effect;
@@ -38,22 +38,23 @@ html{
 @keyframes neon-effect {
     0% {
         text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
-        font-size: 42px;
+        font-size: 24px;
     }
     50% {
         text-shadow: 4px 4px #0a88d0, -4px -4px #0a88d0, 4px -4px #0a88d0, -4px 4px #0a88d0;
-        font-size: 44px;
+        font-size: 26px;
         }
     100% {
             text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
-            font-size: 42px;
+            font-size: 24px;
         }
     }
 
 
 /* game style*/
-body,html{
-
+body{
+    font-family: 'Press Start 2P';
+    font-size: 0px;
     background-color: black;
     overflow: hidden;
 }
@@ -131,7 +132,7 @@ body,html{
     background-color: rgba(61, 101, 233, 0);
 }
 .start-text{
-    font-size: 48px;
+    font-size: 32px;
     color: white;
     margin-top: 60%;
     font-weight: bold;
@@ -156,7 +157,7 @@ img{
 .victory-text{
     margin-top: 50%;
     display: block;
-    font-size: 32px;
+    font-size: 24px;
     color: white;
     font-weight: bold;
 }
@@ -350,7 +351,7 @@ img{
 }
 
 .score-info>div {
-    font-size: 18px;
+    font-size: 16px;
     flex-grow: 1;
     flex-basis: 0;
     background-color: #57b7cc;
