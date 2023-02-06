@@ -3,7 +3,6 @@ document.addEventListener('keyup', function (event){
         document.location.href = 'arkanoid1.html';
     }, 3900)
     document.querySelector('.screen').classList.add('animate-screen');
-    console.log(document.getElementById('text-to-hide').style.opacity)
     
     setTimeout(function (){
         document.getElementById('text-to-hide').style.opacity = "0"
