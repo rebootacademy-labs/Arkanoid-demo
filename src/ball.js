@@ -21,17 +21,21 @@ function Ball() {
       //this.sprite.style.boxShadow = '-5px 5px rgba(116, 197, 215, 0.5), -8px 8px rgba(134, 201, 215,0.4), -10px 10px rgba(150, 206, 217, 0.3)'
       this.speedY *= (-1);
       this.top -= 1;
+      boing1.play();
     }
   }
 
   this.collidesWithLateralWalls = function () {
     if (this.left + this.width > 600 || this.left < 0) {
+      boing2.play();
       this.speedX *= (-1);
     }
+    
   }
 
   this.collidesWithTopWall = function () {
     if (this.top <= 0) {
+      boing2.play();
       this.speedY *= (-1);
     }
   }

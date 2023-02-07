@@ -17,7 +17,11 @@ function Block(width, height, top, left, i, j) {
   this.delete = function (i, j) {
     const blockToRemove = document.querySelector(`.column${i}-${j}`);
     if (blockToRemove !== null) {
-      blockToRemove.parentNode.removeChild(blockToRemove);
+      blockToRemove.classList.add('deleted-block');
+      setTimeout(function (){
+        blockToRemove.parentNode.removeChild(blockToRemove);
+      }, 600)
+      
     }
   }
 }

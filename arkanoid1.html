@@ -13,21 +13,25 @@
   <script defer src="src/blockCollection.js"></script>
   <script defer src="src/game.js"></script>
   <script defer src="src/main.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
 </head>
 
 <body>
   <div class="top-info">
     <div class="score-info">
       <div class="score">
-        <p>Score: </p>
+        <p>Score </p>
         <p class="score-text">0</p>
       </div>
       <div class="high-score">
-        <p>Record: </p>
+        <p>Record </p>
         <p class="record-text">0</p>
       </div>
       <div class="lives">
-        <p>Additional lives:</p>
+        <p>Additional lives</p>
         <p class="lives-text">3</p>
       </div>
     </div>
@@ -38,7 +42,9 @@
   <audio id="loseLifeAudio" src="./resources/loseLife.mp3"></audio>
   <audio id="victoryAudio" src="./resources/victoryAudio.m4a"></audio>
   <audio id="gameOverAudio" src="./resources/gameOverAudio.mov"></audio>
-
+  <audio id="boing1" src="resources/boing1.mp3"></audio>
+  <audio id="boing2" src="resources/boing2.mp3"></audio>
+  
   <div class="container">
     <div class="canvas"></div>
     <div class="platform">
@@ -67,6 +73,8 @@
       <span class="emphasize-text">Press any</span><br> keyboard key <br>to<span class="emphasize-text">
         <span class="invisible-text">re</span>start</span> the game
     </div>
+
+    <div class="black-courtain"></div>
   </div>
   
 </body>

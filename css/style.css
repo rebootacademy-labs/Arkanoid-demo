@@ -1,46 +1,62 @@
 /*Main screen style*/
+html{
+    height: 100vh;
+    width: 100vw;
+}
 .screen{
     background-image: url("../resources/Caraturla-2.png");
-    height: 100vh;
     background-size: cover;
+    height: 100vh;
+    width: 100vw;
     color: white;
     position: relative;
+    margin: 0 auto;
+}
+.animate-screen{
+    animation-name: animateScreen;
+    animation-duration: 4.3s;
 }
 
-.screen >p{
+@keyframes animateScreen {
+    0% {width: 100%; opacity: 1}
+    70% {width: 100px; opacity: 0}
+    100% {width: 99px; opacity: 0}
+}
+
+#text-to-hide{
     position: absolute;
     top: 75%;
     left: 9.5%;
-    font-size: 42px;
+    font-size: 24px;
     font-weight: bold;
     text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
     animation-name: neon-effect;
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
-
 }     
 
 @keyframes neon-effect {
     0% {
         text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
-        font-size: 42px;
+        font-size: 24px;
     }
     50% {
         text-shadow: 4px 4px #0a88d0, -4px -4px #0a88d0, 4px -4px #0a88d0, -4px 4px #0a88d0;
-        font-size: 44px;
+        font-size: 26px;
         }
     100% {
             text-shadow: 2px 2px #0a88d0, -2px -2px #0a88d0, 2px -2px #0a88d0, -2px 2px #0a88d0;
-            font-size: 42px;
+            font-size: 24px;
         }
     }
 
 
 /* game style*/
 body{
-    background-image: url('../resources/Body-juego.png');
-    background-size: cover;
-    width: 100%;
+    font-family: 'Press Start 2P';
+    font-size: 0px;
+    background-color: black;
+    overflow: hidden;
 }
 
 .score-div{
@@ -116,7 +132,7 @@ body{
     background-color: rgba(61, 101, 233, 0);
 }
 .start-text{
-    font-size: 48px;
+    font-size: 32px;
     color: white;
     margin-top: 60%;
     font-weight: bold;
@@ -141,7 +157,7 @@ img{
 .victory-text{
     margin-top: 50%;
     display: block;
-    font-size: 32px;
+    font-size: 24px;
     color: white;
     font-weight: bold;
 }
@@ -183,6 +199,30 @@ img{
 
 .emphasize-text {
     color: red;
+}
+
+.black-courtain{
+    width: 0%;
+    height: 100%;
+    background-color: black;
+    position: absolute;
+    animation-name: courtain;
+    animation-duration: 1s;
+}
+
+@keyframes courtain{
+    0% {width: 100%;}
+    100%{width: 0%;}
+}
+
+.deleted-block{
+    animation-name: deleteBlock;
+    animation-duration: 0.8s;
+}
+@keyframes deleteBlock{
+    0%{transform: scale(1.2)}
+    50%{transform: scale(0.4)}
+    100%{transform: scale(0)}
 }
 
 .column5-1, .column5-3,.column1-1, .column1-2, .column1-3, .column2-1, .column3-1, .column2-3, .column4-1, .column4-3, .column3-2{
@@ -286,7 +326,7 @@ img{
     66% {margin-left: 35%;}
     83% {margin-left: 33%;}
     100% {margin-left: 30%;}
-  }
+}
 
 @keyframes giveLifeToEyes {
     0% {background-color: #fff;}
@@ -311,9 +351,10 @@ img{
 }
 
 .score-info>div {
-    font-size: 18px;
+    font-size: 16px;
     flex-grow: 1;
     flex-basis: 0;
+    background-color: #57b7cc;
 }
 
 .top-info {
