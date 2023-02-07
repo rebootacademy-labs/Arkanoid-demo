@@ -36,15 +36,20 @@ function Game() {
 
   this.gameVictory = function () {
     clearInterval(this.timerId)
+    
     document.querySelector('.victory').style.display = 'block'
     var finalText = document.querySelectorAll(".victory .invisible-text");
     finalText.forEach(e => e.style.display = 'inline')
     this.gameStatus = 0;
     if(this.isNewRecord()) this.record = this.score
-    
     this.updatePanel();
     victoryAudio.play();
-    this.gameStatus = -1
+    setTimeout(function(){
+      game.gameStatus = 0
+      game.restart();
+    }, 2000)
+    
+    
   };
 
   this.gameEngine = function () {
@@ -80,7 +85,7 @@ function Game() {
     this.lives = 3;
     this.score = 0;
     scoreHTML.innerText = this.score;
-    recordHTML.innerText = this.record;
+    recordTextsHTML.forEach(e => e.innerText = this.record);
     livesHTML.innerText = this.lives;
   }
 

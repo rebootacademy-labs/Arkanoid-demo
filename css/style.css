@@ -161,6 +161,9 @@ img{
     color: white;
     font-weight: bold;
 }
+.victory-score{
+    margin-top: 0;
+}
 .blocks {
     position: absolute;
     background-color: rgba(0,0,0, 0);
@@ -173,16 +176,17 @@ img{
     text-align: center;
     height: 100%;
     top: 0;
-    background-color: rgba(241, 221, 34, 0.8);
+    background-color: #57b7cc;
     display: none;
+    animation-name: victoryScreen;
+    animation-duration: 1.5s;
 }
 
-[class^='row'] {
-    
-    box-sizing: content-box;
-    border: 0px;
-    padding: 0px;
-    }
+@keyframes victoryScreen{
+    0% {width: 0%;font-size: 0px; opacity: 0}
+    50% {opacity: 0.1}
+    100%{width: 600px;opacity: 1;}
+}
 
 [class^='col']{
     position: absolute;
