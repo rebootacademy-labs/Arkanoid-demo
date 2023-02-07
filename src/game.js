@@ -22,29 +22,34 @@ function Game() {
 
   this.gameOver = function () {
     clearInterval(this.timerId);
-    document.querySelector('.start').style.display = 'block'
-    var finalText = document.querySelectorAll(".invisible-text");
-    finalText.forEach(e => e.style.display = 'inline')
+    document.querySelector('.game-over').style.display = 'block'
+    var finalText = document.querySelectorAll(".game-over .invisible-text");
     if (this.isNewRecord()) this.record = this.score
     this.updatePanel();
-    this.restart();
-    this.gameStatus = -1;
-    blockCollectionInstance.restart();
     gameOverAudio.play()
+
+    setTimeout(function(){
+      game.gameStatus = -1
+      game.restart();
+    }, 2500)
 
   };
 
   this.gameVictory = function () {
     clearInterval(this.timerId)
+    
     document.querySelector('.victory').style.display = 'block'
     var finalText = document.querySelectorAll(".victory .invisible-text");
     finalText.forEach(e => e.style.display = 'inline')
     this.gameStatus = 0;
     if(this.isNewRecord()) this.record = this.score
-    
     this.updatePanel();
     victoryAudio.play();
-    this.gameStatus = -1
+    setTimeout(function(){
+      game.gameStatus = -1
+      game.restart();
+    }, 2500)
+    
   };
 
   this.gameEngine = function () {
@@ -55,15 +60,18 @@ function Game() {
   this.restart = function (){
     ball.restartPosition();
     platform.restartPosition();
+    blockCollectionInstance.restart();
   }
   this.loseLife = function (){
-    if(this.lives === 0) this.gameOver();
+    if(this.lives === 0){
+      this.gameStatus = 0;
+      this.gameOver();
+    } 
     else {
       clearInterval(this.timerId)
       this.restart()
-      document.querySelector('.start').style.display = 'block'
-      var finalText = document.querySelectorAll(".invisible-text");
-      finalText.forEach(e => e.style.display = 'inline')
+      var loseLifeText = document.querySelector(".life-lost");
+      loseLifeText.style.display = 'block';
       this.lives--
       this.gameStatus = -1
       livesHTML.innerText = this.lives
@@ -80,7 +88,7 @@ function Game() {
     this.lives = 3;
     this.score = 0;
     scoreHTML.innerText = this.score;
-    recordHTML.innerText = this.record;
+    recordTextsHTML.forEach(e => e.innerText = this.record);
     livesHTML.innerText = this.lives;
   }
 

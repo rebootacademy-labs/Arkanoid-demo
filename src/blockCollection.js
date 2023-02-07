@@ -29,7 +29,6 @@ function BlockCollection(width, height, rows, columns, left, top) {
             i,
             j
           )
-        if(i === 1 && j === 10) console.log(blockToInsert);
         this.blocks.push(blockToInsert)
       }
     }
@@ -53,9 +52,6 @@ function BlockCollection(width, height, rows, columns, left, top) {
           game.gameVictory();
         } 
         return this.blocks.splice(i, 1)[0]
-      
-        
-        break
       }
     }
   }
