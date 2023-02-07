@@ -2,7 +2,7 @@
 const game = new Game();
 const ball = new Ball();
 const platform = new Platform();
-const blockCollectionInstance = new BlockCollection(480, 240, 14, 33, 60, 60);
+const blockCollectionInstance = new BlockCollection(480, 240, 2, 2, 60, 60);
 
 //We fill the blocks div with all the blocks we create
 const blockHTML = document.querySelector('.blocks');
