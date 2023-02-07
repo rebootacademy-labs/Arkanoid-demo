@@ -47,7 +47,6 @@ function Ball() {
     {
       
       let blockRemoved = blockCollectionInstance.removeBlock(this.top, this.left, this.width, this.height)
-      console.log(blockRemoved)
       if(blockRemoved !== undefined){
         if(Math.random() < 0.5) this.speedX *= (-1)
         else this.speedY *= (-1)

@@ -83,7 +83,21 @@ body{
     height: 100%;
 }
 
-
+.life-lost{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    top: 0;
+    background-color: rgba(61, 101, 233, 0);
+    display: none;
+}
+.life-lost>p{
+    font-size: 32px;
+    color: white;
+    margin-top: 60%;
+    font-weight: bold;
+}
 .platform {
     position: absolute;
     top: 780px;

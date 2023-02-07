@@ -66,9 +66,8 @@ function Game() {
     else {
       clearInterval(this.timerId)
       this.restart()
-      document.querySelector('.start').style.display = 'block'
-      var finalText = document.querySelectorAll(".invisible-text");
-      finalText.forEach(e => e.style.display = 'inline')
+      var loseLifeText = document.querySelector(".life-lost");
+      loseLifeText.style.display = 'block';
       this.lives--
       this.gameStatus = -1
       livesHTML.innerText = this.lives

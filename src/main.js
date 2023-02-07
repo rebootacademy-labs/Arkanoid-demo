@@ -7,6 +7,7 @@ blockCollectionInstance.draw();
 blockHTML.innerHTML = blockCollectionInstance.generateBlockCollection();
 blockCollectionInstance.drawAllBlocks()
 const initialText = document.querySelector('.start');
+const lostLifeText = document.querySelector('.life-lost');
 const blockCollisionAudio = document.querySelector("#blockCollisionAudio")
 const gameOverAudio = document.querySelector("#gameOverAudio")
 const loseLifeAudio = document.querySelector('#loseLifeAudio');
@@ -19,6 +20,7 @@ const boing2 = document.querySelector('#boing2');
 
 document.addEventListener('keyup', function (event) {
   initialText.style.display = "none"
+  lostLifeText.style.display = "none"
   if (game.gameStatus === -1) {
     game.startGame();
     game.gameStatus = 1
