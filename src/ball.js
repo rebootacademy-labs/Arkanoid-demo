@@ -1,6 +1,6 @@
 function Ball() {
-  this.speedX = 3;
-  this.speedY = 3;
+  this.speedX = -2;
+  this.speedY = -1;
   this.top = 600
   this.height = 25
   this.width = 25
@@ -72,11 +72,10 @@ function Ball() {
   }
   this.restartPosition = function (){
     this.top = 600
-    this.left = 288
-    this.speedX = 3
-    this.speedY = 3
+    this.left = 288 
     this.sprite.style.top = this.top + 'px'
     this.sprite.style.left = this.left + 'px'
-
+    this.speedX = -2;
+    this.speedY = -1;
   }
 }

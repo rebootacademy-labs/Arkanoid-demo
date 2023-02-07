@@ -21,6 +21,6 @@ function Platform() {
     this.left = 250;
     this.sprite.style.top = this.top + 'px'
     this.sprite.style.left = this.left + 'px'
-
+    this.speed = 5;
   }
 }
