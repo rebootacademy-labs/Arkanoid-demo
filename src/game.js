@@ -62,6 +62,10 @@ function Game() {
     platform.restartPosition();
     blockCollectionInstance.restart();
   }
+  this.restartSituation = function () {
+    ball.restartPosition();
+    platform.restartPosition();
+  }
   this.loseLife = function (){
     if(this.lives === 0){
       this.gameStatus = 0;
@@ -69,7 +73,7 @@ function Game() {
     } 
     else {
       clearInterval(this.timerId)
-      this.restart()
+      this.restartSituation()
       var loseLifeText = document.querySelector(".life-lost");
       loseLifeText.style.display = 'block';
       this.lives--
