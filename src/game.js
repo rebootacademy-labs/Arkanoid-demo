@@ -45,9 +45,9 @@ function Game() {
     this.updatePanel();
     victoryAudio.play();
     setTimeout(function(){
-      game.gameStatus = 0
+      game.gameStatus = -1
       game.restart();
-    }, 2000)
+    }, 6000)
     
     
   };
@@ -60,6 +60,7 @@ function Game() {
   this.restart = function (){
     ball.restartPosition();
     platform.restartPosition();
+    blockCollectionInstance.restart();
   }
   this.loseLife = function (){
     if(this.lives === 0) this.gameOver();
