@@ -39,7 +39,7 @@
   </div>
   <audio src=""></audio>
   <audio id="blockCollisionAudio" src="./resources/colisión_bloque.mov"></audio>
-  <audio src="resources/audioFondo.mp3" autoplay height="0px" width="0px" type="audio/mp3"></audio>
+  <audio id="backgroundAudio" src="resources/audioFondo.mp3" autoplay height="0px" width="0px" type="audio/mp3"></audio>
   <audio id="loseLifeAudio" src="./resources/loseLife.mp3"></audio>
   <audio id="victoryAudio" src="./resources/victoryAudio.m4a"></audio>
   <audio id="gameOverAudio" src="./resources/gameOverAudio.mov"></audio>
@@ -72,8 +72,15 @@
 
     <div class="life-lost">
       <p>
-        <span class="emphasize-text">You lost a life!</br></span><span>Don't give up!</span>
+        <span class="emphasize-text">You lost a life!</br></span><span>Don't give up!</span>  
         <span>Press any key to <span class="emphasize-text">continue!</span></span>
+      </p>
+    </div>
+
+    <div class="game-over">
+      <p>
+        <span class="emphasize-text">Game over!</span>
+       
       </p>
     </div>
 

@@ -92,12 +92,14 @@ body{
     background-color: rgba(61, 101, 233, 0);
     display: none;
 }
-.life-lost>p{
+
+.life-lost>p, .game-over>p{
     font-size: 32px;
     color: white;
     margin-top: 60%;
     font-weight: bold;
 }
+
 .platform {
     position: absolute;
     top: 780px;
@@ -105,6 +107,8 @@ body{
     width: 100px;
     height: 15px;
     background-color: #57b7cc;
+    border: 1px solid white;
+    box-sizing: border-box;
     padding: 0;
 }
 .eyes{
@@ -184,7 +188,7 @@ img{
     
 }
 
-.victory{
+.victory, .game-over{
     position: absolute;
     width: 100%;
     text-align: center;
@@ -192,11 +196,15 @@ img{
     top: 0;
     background-color: #57b7cc;
     display: none;
-    animation-name: victoryScreen;
+    animation-name: endScreen;
     animation-duration: 1.5s;
 }
 
-@keyframes victoryScreen{
+.game-over{
+    background-color: black;
+}
+
+@keyframes endScreen{
     0% {width: 0%;font-size: 0px; opacity: 0}
     50% {opacity: 0.1}
     100%{width: 600px;opacity: 1;}

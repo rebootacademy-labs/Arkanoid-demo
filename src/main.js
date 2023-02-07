@@ -10,6 +10,7 @@ blockCollectionInstance.drawAllBlocks()
 const initialText = document.querySelector('.start');
 const lostLifeText = document.querySelector('.life-lost');
 const victoryText = document.querySelector('.victory');
+const gameOverText = document.querySelector('.game-over');
 
 const blockCollisionAudio = document.querySelector("#blockCollisionAudio")
 const gameOverAudio = document.querySelector("#gameOverAudio")
@@ -27,14 +28,17 @@ document.addEventListener('keyup', function (event) {
     initialText.style.display = "none"
     lostLifeText.style.display = "none"
     victoryText.style.display = "none"
+    gameOverText.style.display = "none"
+    
     game.startGame();
     game.gameStatus = 1
   }
   if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' && game.gameStatus === 1) {
     platform.direction = null
   }
-  if (game.gameStatus === 0) {
-    /*this.location.reload();*/
-
-  }
 })
+
+document.getElementById('backgroundAudio').addEventListener('ended', function () {
+  console.log("audio finished")
+  this.currentTime = 0;
+}, false);

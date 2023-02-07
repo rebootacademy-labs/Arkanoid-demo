@@ -22,15 +22,16 @@ function Game() {
 
   this.gameOver = function () {
     clearInterval(this.timerId);
-    document.querySelector('.start').style.display = 'block'
-    var finalText = document.querySelectorAll(".invisible-text");
-    finalText.forEach(e => e.style.display = 'inline')
+    document.querySelector('.game-over').style.display = 'block'
+    var finalText = document.querySelectorAll(".game-over .invisible-text");
     if (this.isNewRecord()) this.record = this.score
     this.updatePanel();
-    this.restart();
-    this.gameStatus = -1;
-    blockCollectionInstance.restart();
     gameOverAudio.play()
+
+    setTimeout(function(){
+      game.gameStatus = -1
+      game.restart();
+    }, 2500)
 
   };
 
@@ -47,8 +48,7 @@ function Game() {
     setTimeout(function(){
       game.gameStatus = -1
       game.restart();
-    }, 6000)
-    
+    }, 2500)
     
   };
 
@@ -63,7 +63,10 @@ function Game() {
     blockCollectionInstance.restart();
   }
   this.loseLife = function (){
-    if(this.lives === 0) this.gameOver();
+    if(this.lives === 0){
+      this.gameStatus = 0;
+      this.gameOver();
+    } 
     else {
       clearInterval(this.timerId)
       this.restart()
